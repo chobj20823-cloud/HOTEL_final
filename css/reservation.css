@@ -1,0 +1,93 @@
+/* ==========================================================================
+   reservation.css – 예약 페이지 (reservation.html)
+   레이아웃: 좌측 단계별 입력 영역 + 우측 예약 요약(스티키) / 모바일은 1열
+   ========================================================================== */
+
+/* 상단 타이틀 배너 */
+.page-banner {
+  padding: calc(var(--header-h) + 70px) 0 70px;
+  text-align: center;
+  color: var(--white);
+  background: linear-gradient(135deg, #3d9ad8 0%, var(--blue-500) 55%, var(--blue-600) 100%);
+}
+.page-banner .eyebrow { display: block; font-family: var(--font-display); letter-spacing: 0.3em; opacity: 0.9; margin-bottom: 8px; }
+.page-banner h1 { font-family: var(--font-display); font-weight: 500; letter-spacing: 0.08em; font-size: clamp(2rem, 5vw, 3.2rem); }
+.page-banner p { margin-top: 10px; font-weight: 300; opacity: 0.92; }
+
+.reservation { background: var(--surface-soft); padding: 60px 0 100px; }
+.reservation-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 30px; align-items: start; }
+
+/* 단계 표시 */
+.steps { display: flex; gap: 8px; margin-bottom: 24px; }
+.steps li { flex: 1; text-align: center; padding: 12px 6px; border-bottom: 3px solid var(--line-light); color: var(--text-sub); font-size: 0.88rem; background: var(--white); border-radius: var(--radius) var(--radius) 0 0; }
+.steps li.is-active { border-color: var(--blue-500); color: var(--blue-500); font-weight: 700; }
+.steps li.is-done { border-color: var(--sky-300); color: var(--blue-600); }
+
+/* 카드 패널 */
+.panel { background: var(--white); border: 1px solid var(--line-light); border-radius: 10px; box-shadow: 0 10px 30px rgba(10, 37, 64, 0.06); padding: 30px; }
+.panel h2 { font-size: 1.3rem; color: var(--text-main); margin-bottom: 4px; }
+.panel .lead { color: var(--text-sub); font-size: 0.92rem; margin-bottom: 22px; }
+
+/* 검색 폼 (일정/인원) */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 12px 14px; border: 1px solid var(--line-light); border-radius: var(--radius);
+  outline: 0; transition: var(--transition); color: var(--text-main); background: var(--white);
+  color-scheme: light;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue-500); box-shadow: 0 0 0 3px rgba(42, 133, 198, 0.18); }
+.form-group.has-error input { border-color: var(--danger); }
+.field-error { color: var(--danger); font-size: 0.8rem; min-height: 1em; }
+.form-error { color: var(--white); background: rgba(214, 69, 69, 0.92); padding: 10px 14px; border-radius: var(--radius); margin-top: 16px; font-size: 0.9rem; }
+.agree { display: flex; gap: 8px; align-items: center; font-size: 0.9rem; margin-top: 12px; }
+.actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; }
+.actions .btn:only-child { margin-left: auto; }
+
+/* 객실 선택 목록 */
+.room-option { display: grid; grid-template-columns: 200px 1fr auto; gap: 20px; align-items: center; padding: 16px; border: 1px solid var(--line-light); border-radius: var(--radius); margin-bottom: 14px; transition: var(--transition); }
+.room-option:hover { border-color: var(--blue-500); box-shadow: 0 10px 30px rgba(31, 111, 174, 0.14); }
+.room-option img { width: 200px; height: 130px; object-fit: cover; border-radius: var(--radius); }
+.room-option h3 { color: var(--text-main); font-size: 1.1rem; }
+.room-option p { color: var(--text-sub); font-size: 0.88rem; }
+.room-option .total { text-align: right; }
+.room-option .total strong { display: block; color: var(--blue-500); font-size: 1.25rem; }
+.room-option .total small { display: block; color: var(--text-sub); margin-bottom: 8px; }
+.room-option .btn { padding: 10px 22px; }
+
+/* 예약 요약 (우측 스티키) */
+.summary { position: sticky; top: calc(var(--header-h) + 20px); }
+.summary h2 { font-size: 1.1rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--blue-500); }
+.summary dl { display: grid; grid-template-columns: 80px 1fr; gap: 10px 8px; font-size: 0.93rem; }
+.summary dt { color: var(--text-sub); }
+.summary dd { color: var(--text-main); font-weight: 500; text-align: right; }
+.summary .total-row { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line-light); display: flex; justify-content: space-between; align-items: baseline; }
+.summary .total-row span { color: var(--text-sub); font-size: 0.9rem; }
+.summary .total-row strong { color: var(--blue-500); font-size: 1.5rem; }
+.summary .note { margin-top: 14px; font-size: 0.8rem; color: var(--text-sub); }
+
+/* 예약 완료 */
+.done-box { text-align: center; padding: 20px 0; }
+.done-box .check { width: 76px; height: 76px; margin: 0 auto 18px; border-radius: 50%; background: var(--blue-500); color: var(--white); font-size: 2.4rem; display: flex; align-items: center; justify-content: center; animation: pop 0.5s ease; }
+.done-box h2 { font-size: 1.5rem; }
+.done-box .code { display: inline-block; margin: 14px 0; padding: 8px 20px; background: var(--surface-soft); color: var(--blue-600); font-family: var(--font-display); letter-spacing: 0.15em; font-size: 1.2rem; border-radius: var(--radius); }
+.done-table { width: 100%; max-width: 480px; margin: 18px auto 26px; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+.done-table th, .done-table td { padding: 10px 12px; border-bottom: 1px solid var(--line-light); }
+.done-table th { width: 110px; color: var(--text-sub); font-weight: 500; }
+@keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+
+/* ── 반응형 ───────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .reservation-layout { grid-template-columns: 1fr; }
+  .summary { position: static; order: -1; }      /* 모바일: 요약이 위로 */
+}
+@media (max-width: 640px) {
+  .room-option { grid-template-columns: 1fr; }
+  .room-option img { width: 100%; height: 180px; }
+  .room-option .total { text-align: left; }
+  .form-grid { grid-template-columns: 1fr; }
+  .panel { padding: 22px; }
+  .steps li { font-size: 0.75rem; }
+}

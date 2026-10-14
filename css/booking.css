@@ -1,0 +1,128 @@
+/* ==========================================================================
+   booking.css – 메인페이지 히어로 하단 '빠른 예약(Quick Booking)' 바
+   (예약 진행 화면은 reservation.html / css/reservation.css 로 분리되었습니다)
+   ========================================================================== */
+
+.booking-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: min(1180px, 94%);
+}
+
+/* 데스크탑: 5개 입력 + 버튼 = 한 줄 (CSS Grid) */
+.booking-form {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) auto;
+  background: rgba(255, 255, 255, 0.94);
+  /* 반투명 화이트 (글래스 효과) */
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(32, 56, 75, 0.18);
+  overflow: hidden;
+  text-align: left;
+}
+
+.booking-field {
+  padding: 16px 20px;
+  border-right: 1px solid var(--line-light);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: background var(--transition);
+}
+
+.booking-field:focus-within,
+.booking-field:hover {
+  background: var(--surface-soft);
+}
+
+.booking-field label {
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--blue-500);
+}
+
+.booking-field input,
+.booking-field select {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  color-scheme: light;
+  /* 날짜 달력 팝업을 라이트 테마로 */
+}
+
+.booking-field select option {
+  color: var(--text);
+  background: var(--white);
+}
+
+/* 드롭다운 목록은 흰 배경 */
+.booking-form .btn {
+  border-radius: 0;
+  padding: 0 40px;
+  font-size: 1rem;
+}
+
+.booking-night {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+
+/* "N박" 표시 */
+.booking-error {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--white);
+  background: rgba(214, 69, 69, 0.92);
+  padding: 8px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+/* ── 반응형 ───────────────────────────────────────────────────── */
+/* 태블릿: 3열 x 2줄 + 버튼은 한 줄 전체 */
+@media (max-width: 1024px) {
+  .booking-form {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .booking-field {
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .booking-form .btn {
+    grid-column: 1 / -1;
+    padding: 18px;
+  }
+}
+
+/* 모바일: 2열 */
+@media (max-width: 860px) {
+  .booking-bar {
+    bottom: 20px;
+  }
+
+  .booking-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 소형 모바일: 1열 */
+@media (max-width: 480px) {
+  .booking-form {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-field {
+    border-right: 0;
+  }
+}

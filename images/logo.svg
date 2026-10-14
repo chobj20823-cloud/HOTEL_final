@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" role="img" aria-label="WYNDHAM GOSEONG GANGWON">
+  <title>WYNDHAM GOSEONG GANGWON</title>
+  <defs>
+    <!-- 윈덤 고유의 로터스/W 엠블럼을 사각형에서 파내기 위한 마스크 -->
+    <mask id="wyndhamMask">
+      <!-- 기본 흰 사각형 -->
+      <rect width="80" height="80" fill="#fff" rx="4"/>
+      <!-- 상단 로터스 꽃잎 3장 -->
+      <path d="M40 16 C34 22 34 28 40 33 C46 28 46 22 40 16 Z" fill="#000"/>
+      <path d="M33 22 C26 26 27 32 34 35 C38 31 38 25 33 22 Z" fill="#000"/>
+      <path d="M47 22 C54 26 53 32 46 35 C42 31 42 25 47 22 Z" fill="#000"/>
+      <!-- 하단 외곽 날개형 W 레이어 -->
+      <path d="M19 36 L28 65 C29 68 32 70 35 69 L40 54 L45 69 C48 70 51 68 52 65 L61 36 C61 34 58 33 56 35 L49 57 L44 42 C43 39 37 39 36 42 L31 57 L24 35 C22 33 19 34 19 36 Z" fill="#000"/>
+      <!-- W 내부 지지 밴드 -->
+      <path d="M28 38 L34 53 L37 45 C38 43 42 43 43 45 L46 53 L52 38 C53 36 50 35 48 37 L44 48 L40 37 L36 48 L32 37 C30 35 27 36 28 38 Z" fill="#000"/>
+    </mask>
+  </defs>
+
+  <!-- 단색 로고 (투명 헤더: CSS invert로 화이트 / 스크롤 시 딥 네이비 #20384b) -->
+  <g fill="#20384b">
+    <!-- 윈덤 사각 엠블럼 -->
+    <rect x="4" y="10" width="80" height="80" rx="4" mask="url(#wyndhamMask)"/>
+
+    <!-- 메인 워드마크: WYNDHAM + ® -->
+    <text x="100" y="58"
+          font-family="'Montserrat', 'Oswald', 'Noto Sans KR', Arial, sans-serif"
+          font-size="46" font-weight="700" letter-spacing="4"
+          textLength="316" lengthAdjust="spacing">WYNDHAM</text>
+    <text x="420" y="36"
+          font-family="Arial, sans-serif"
+          font-size="14" font-weight="600">®</text>
+
+    <!-- 서브 타이틀: GOSEONG GANGWON -->
+    <text x="102" y="84"
+          font-family="'Montserrat', 'Noto Sans KR', Arial, sans-serif"
+          font-size="18" font-weight="600" letter-spacing="4.5"
+          textLength="320" lengthAdjust="spacing">GOSEONG GANGWON</text>
+  </g>
+</svg>
