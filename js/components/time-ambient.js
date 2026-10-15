@@ -2,7 +2,14 @@
 
 /**
  * time-ambient.js – 낮, 일몰, 밤 시간대별 앰비언스 체인저
- * 인피니티 풀 배경 이미지, 텍스트 카피, 배경 테마 색상을 유기적으로 전환합니다.
+ * 
+ * [동작 방식]
+ * 1. 실시간 시계 연동: 페이지 최초 로드 시 실제 접속 시간에 맞춰 시작 풍경을 자동 결정합니다.
+ *    - 06:00 ~ 17:00 : DAY (눈부신 청정 오션뷰)
+ *    - 17:00 ~ 20:00 : SUNSET (골든 아워 노을빛 인피니티 풀)
+ *    - 20:00 ~ 06:00 : NIGHT (문라이트 별빛 야경 풀)
+ * 2. 수동 선택: 상단 DAY / SUNSET / NIGHT 버튼을 클릭하여 원하는 시간대 풍경으로 즉시 감상 가능합니다.
+ * 3. 자동 전환 없음: 사용자의 의사와 무관하게 시간이 지나 멋대로 바뀌지 않습니다.
  */
 (function (global) {
   const Hotel = global.Hotel || (global.Hotel = {});
@@ -29,16 +36,32 @@
   };
 
   const TimeAmbient = {
-    current: "day",
-    autoPlayTimer: null,
+    current: null,
     themesList: ["day", "sunset", "night"],
+
+    /**
+     * 접속 시각 기준 테마 판별:
+     * - 06시 이상 ~ 17시 미만: day
+     * - 17시 이상 ~ 20시 미만: sunset
+     * - 20시 이상 ~ 06시 미만: night
+     */
+    getTimeBasedTheme: function () {
+      const hour = new Date().getHours();
+      if (hour >= 6 && hour < 17) {
+        return "day";
+      } else if (hour >= 17 && hour < 20) {
+        return "sunset";
+      } else {
+        return "night";
+      }
+    },
 
     init: function () {
       const container = document.querySelector(".time-ambient-nav");
       if (!container) return;
 
       const buttons = container.querySelectorAll(".time-btn");
-      const heroSection = document.getElementById("booking");
+      const heroSection = document.getElementById("booking") || document.querySelector(".hero");
       const heroContent = heroSection ? heroSection.querySelector(".hero-content") : null;
       const layers = document.querySelectorAll(".hero-bg-layer");
 
@@ -46,7 +69,7 @@
 
       const self = this;
 
-      function switchTheme(themeKey, isManual) {
+      function switchTheme(themeKey, animateText) {
         if (!THEMES[themeKey] || self.current === themeKey) return;
         self.current = themeKey;
 
@@ -58,7 +81,7 @@
           btn.tabIndex = isActive ? 0 : -1;
         });
 
-        // 2. 바디 테마 데이터 속성 (CSS 변수 및 오버레이 반영)
+        // 2. 바디 테마 데이터 속성
         document.body.setAttribute("data-theme", themeKey);
 
         // 3. 배경 레이어 크로스페이드
@@ -69,35 +92,36 @@
 
         // 4. 히어로 카피 텍스트 크로스페이드
         if (heroContent) {
-          heroContent.classList.add("is-changing");
-          setTimeout(function () {
-            const data = THEMES[themeKey];
-            const eyebrowEl = heroContent.querySelector(".eyebrow");
-            const h1El = heroContent.querySelector("h1");
-            const pEl = heroContent.querySelector("p");
+          const data = THEMES[themeKey];
+          const eyebrowEl = heroContent.querySelector(".eyebrow");
+          const h1El = heroContent.querySelector("h1");
+          const pEl = heroContent.querySelector("p");
 
+          if (animateText) {
+            heroContent.classList.add("is-changing");
+            setTimeout(function () {
+              if (eyebrowEl) eyebrowEl.textContent = data.eyebrow;
+              if (h1El) h1El.innerHTML = data.title;
+              if (pEl) pEl.textContent = data.desc;
+              heroContent.classList.remove("is-changing");
+            }, 300);
+          } else {
+            // 첫 진입 시 깜빡임 없이 즉시 반영
             if (eyebrowEl) eyebrowEl.textContent = data.eyebrow;
             if (h1El) h1El.innerHTML = data.title;
             if (pEl) pEl.textContent = data.desc;
-
-            heroContent.classList.remove("is-changing");
-          }, 300);
-        }
-
-        // 사용자가 직접 클릭했을 때 자동 순환 타이머 리셋
-        if (isManual) {
-          self.restartAutoPlay();
+          }
         }
       }
 
-      // 클릭 이벤트 등록
+      // 클릭 이벤트 등록 (수동 전환)
       buttons.forEach(function (btn) {
         btn.addEventListener("click", function () {
           const targetTheme = this.dataset.time;
           switchTheme(targetTheme, true);
         });
 
-        // 키보드 접근성 (좌/우 방향키 지원)
+        // 키보드 접근성 (좌/우/상/하 방향키 지원)
         btn.addEventListener("keydown", function (e) {
           let targetIndex = -1;
           const currIndex = self.themesList.indexOf(self.current);
@@ -121,64 +145,10 @@
         });
       });
 
-      // 초기 테마 설정
-      document.body.setAttribute("data-theme", "day");
-
-      // 12초마다 자동 순환 (은은한 앰비언스 쇼케이스)
-      self.startAutoPlay(switchTheme);
-    },
-
-    startAutoPlay: function (switchFn) {
-      const self = this;
-      this.autoPlayTimer = setInterval(function () {
-        const currIndex = self.themesList.indexOf(self.current);
-        const nextIndex = (currIndex + 1) % self.themesList.length;
-        switchFn(self.themesList[nextIndex], false);
-      }, 12000);
-    },
-
-    restartAutoPlay: function () {
-      if (this.autoPlayTimer) {
-        clearInterval(this.autoPlayTimer);
-      }
-      const self = this;
-      const container = document.querySelector(".time-ambient-nav");
-      if (!container) return;
-      const layers = document.querySelectorAll(".hero-bg-layer");
-      const heroSection = document.getElementById("booking");
-      const heroContent = heroSection ? heroSection.querySelector(".hero-content") : null;
-      const buttons = container.querySelectorAll(".time-btn");
-
-      this.autoPlayTimer = setInterval(function () {
-        const currIndex = self.themesList.indexOf(self.current);
-        const nextIndex = (currIndex + 1) % self.themesList.length;
-        const nextTheme = self.themesList[nextIndex];
-
-        self.current = nextTheme;
-        buttons.forEach(function (btn) {
-          const isActive = btn.dataset.time === nextTheme;
-          btn.classList.toggle("is-active", isActive);
-          btn.setAttribute("aria-selected", isActive ? "true" : "false");
-          btn.tabIndex = isActive ? 0 : -1;
-        });
-        document.body.setAttribute("data-theme", nextTheme);
-        layers.forEach(function (layer) {
-          layer.classList.toggle("is-active", layer.dataset.themeLayer === nextTheme);
-        });
-        if (heroContent) {
-          heroContent.classList.add("is-changing");
-          setTimeout(function () {
-            const data = THEMES[nextTheme];
-            const eyebrowEl = heroContent.querySelector(".eyebrow");
-            const h1El = heroContent.querySelector("h1");
-            const pEl = heroContent.querySelector("p");
-            if (eyebrowEl) eyebrowEl.textContent = data.eyebrow;
-            if (h1El) h1El.innerHTML = data.title;
-            if (pEl) pEl.textContent = data.desc;
-            heroContent.classList.remove("is-changing");
-          }, 300);
-        }
-      }, 12000);
+      // 인라인 스크립트로 이미 적용된 테마가 있으면 그 상태를 유지 (깜빡임 완전 방지)
+      const initialTheme = global.__INITIAL_THEME__ || self.getTimeBasedTheme();
+      self.current = initialTheme;
+      document.body.setAttribute("data-theme", initialTheme);
     }
   };
 
