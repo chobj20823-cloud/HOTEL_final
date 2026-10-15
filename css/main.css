@@ -30,20 +30,25 @@ main {
 .header .inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
 
 /* ── 로고 ────────────────────────────────────────────────────────────────────────
-   images/logo.png (배경 투명 PNG/SVG 권장)
-   - 히어로 위(투명 헤더) : 자동으로 흰색 로고로 표시
-   - 스크롤 / 서브페이지(흰 헤더) : 원본 컬러 로고로 표시
-   - 푸터(네이비 배경) : 흰색 로고로 표시
+   공식 윈덤 로고 이미지 (배경 투명 PNG)
+   - 히어로 위(투명 헤더) : logo-white.png (화이트 로고 원본)
+   - 스크롤 / 서브페이지(흰 헤더) : logo.png (컬러 로고 원본)
+   - 푸터(네이비 배경) : logo-white.png (화이트 로고 원본)
    로고 크기는 --logo-h 로 조절합니다. ─────────────────────────────────────────── */
-.logo { display: inline-flex; align-items: center; --logo-h: 68px; }
-.logo-img { height: var(--logo-h); width: auto; filter: brightness(0) invert(1); transition: filter var(--transition); }
-.header.is-scrolled .logo-img,
-.header.header--solid .logo-img { filter: none; }
-.logo-text { display: none; font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.18em; font-weight: 500; }
-/* 로고 이미지가 없을 때(header.js 가 .is-fallback 추가) 텍스트 로고로 대체 */
-.logo.is-fallback .logo-img { display: none; }
-.logo.is-fallback .logo-text { display: inline; }
-.footer .logo-img { filter: brightness(0) invert(1); }
+.logo { display: inline-flex; align-items: center; --logo-h: 48px; }
+.logo-img { height: var(--logo-h); width: auto; display: block; object-fit: contain; }
+
+/* 헤더: 기본(투명 헤더) 상태에서는 화이트 로고 노출, 컬러 로고 숨김 */
+.header .logo-img--white { display: block; }
+.header .logo-img--color { display: none; }
+
+/* 헤더: 스크롤 시 및 화이트 헤더에서는 컬러 로고 노출, 화이트 로고 숨김 */
+.header.is-scrolled .logo-img--white,
+.header.header--solid .logo-img--white { display: none; }
+.header.is-scrolled .logo-img--color,
+.header.header--solid .logo-img--color { display: block; }
+
+.footer .logo-img { height: var(--logo-h); width: auto; display: block; }
 .gnb { display: flex; gap: 40px; }
 .gnb a { font-family: var(--font-display); letter-spacing: 0.12em; font-size: 0.95rem; position: relative; padding: 6px 0; }
 .gnb a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--sky-300); transition: width var(--transition); }
@@ -539,5 +544,6 @@ body[data-theme="night"] .hero-content .eyebrow {
   }
 }
 @media (max-width: 600px) {
+  .logo { --logo-h: 44px; }
   .room-grid, .fac-grid { grid-template-columns: 1fr; }
 }

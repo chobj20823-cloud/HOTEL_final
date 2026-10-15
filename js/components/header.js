@@ -7,25 +7,12 @@
 (function (global) {
   const U = global.Hotel.Util;
 
-  /** 로고 이미지가 없을 때 텍스트 로고로 대체 */
-  function initLogoFallback() {
-    U.qsa(".logo-img").forEach(function (img) {
-      const logo = img.closest(".logo");
-      if (!logo) { return; }
-      const useText = function () { logo.classList.add("is-fallback"); };
-      img.addEventListener("error", useText);
-      // 이미 로딩 실패한 경우(이벤트를 놓친 경우)까지 대비
-      if (img.complete && img.naturalWidth === 0) { useText(); }
-    });
-  }
-
   global.Hotel.Header = {
     init: function () {
       const header = U.qs("#header");
       const toggle = U.qs("#menuToggle");
       const gnb = U.qs("#gnb");
 
-      initLogoFallback();
       if (!header) { return; }
 
       const onScroll = function () {

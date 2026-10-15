@@ -4,7 +4,7 @@
    ▶ 색상을 바꾸고 싶다면 아래 :root 의 변수만 수정하세요. (전체 사이트에 반영됨)
    ▶ 컨셉: 딥 네이비 배경 + 스카이블루 포인트 + 화이트 텍스트
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Oswald:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Oswald:wght@400;500;600&display=swap');
 
 :root {
   /* ── Brand colors (사용자 가이드 비율 적용) ─────────────────────────── */
