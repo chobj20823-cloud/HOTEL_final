@@ -36,7 +36,28 @@
   <main id="top">
     <!-- HERO + 예약 바 -->
     <section class="hero" id="booking">
-      <img src="images/ref/bg_main.png" alt="윈덤 오션뷰 인피니티 풀 전경" class="hero-bg">
+      <!-- 낮 / 일몰 / 밤 인피니티 풀 다이내믹 배경 레이어 -->
+      <div class="hero-bg-wrapper" aria-hidden="true">
+        <div class="hero-bg-layer is-active" data-theme-layer="day" style="background-image: url('images/ref/bg_main.png');"></div>
+        <div class="hero-bg-layer" data-theme-layer="sunset" style="background-image: url('images/bg_sunset.jpg');"></div>
+        <div class="hero-bg-layer" data-theme-layer="night" style="background-image: url('images/bg_night.jpg');"></div>
+      </div>
+
+      <!-- 시간대별(낮/일몰/밤) 인피니티 풀 테마 스위처 바 -->
+      <nav class="time-ambient-nav" role="tablist" aria-label="인피니티 풀 시간대별 풍경 선택">
+        <button type="button" role="tab" class="time-btn is-active" data-time="day" aria-selected="true" aria-controls="booking">
+          <span class="time-idx">01</span>
+          <span class="time-label">DAY</span>
+        </button>
+        <button type="button" role="tab" class="time-btn" data-time="sunset" aria-selected="false" aria-controls="booking" tabindex="-1">
+          <span class="time-idx">02</span>
+          <span class="time-label">SUNSET</span>
+        </button>
+        <button type="button" role="tab" class="time-btn" data-time="night" aria-selected="false" aria-controls="booking" tabindex="-1">
+          <span class="time-idx">03</span>
+          <span class="time-label">NIGHT</span>
+        </button>
+      </nav>
       <div class="hero-content">
         <span class="eyebrow">OCEAN VIEW HOTEL</span>
         <h1>EXTRAORDINARY<br>ROOM</h1>
@@ -44,47 +65,111 @@
         <a href="#rooms" class="more-link">자세히 보기 &gt;</a>
       </div>
 
-      <!-- ★ 빠른 예약(Quick Booking) 폼 : 동작은 js/components/booking-bar.js 에서 처리 -->
-      <div class="booking-bar">
-        <form class="booking-form" id="bookingForm" aria-label="빠른 예약" novalidate>
-          <div class="booking-field">
-            <label for="checkIn">CHECK-IN</label>
-            <input type="date" id="checkIn" name="checkIn" required>
-          </div>
-          <div class="booking-field">
-            <label for="checkOut">CHECK-OUT <output id="nightsOutput" class="booking-night" for="checkIn checkOut"></output></label>
-            <input type="date" id="checkOut" name="checkOut" required>
-          </div>
-          <div class="booking-field">
-            <label for="rooms">ROOMS</label>
-            <select id="rooms" name="rooms">
-              <option value="1" selected>객실 1개</option>
-              <option value="2">객실 2개</option>
-              <option value="3">객실 3개</option>
-              <option value="4">객실 4개</option>
-            </select>
-          </div>
-          <div class="booking-field">
-            <label for="adults">ADULTS</label>
-            <select id="adults" name="adults">
-              <option value="1">성인 1명</option>
-              <option value="2" selected>성인 2명</option>
-              <option value="3">성인 3명</option>
-              <option value="4">성인 4명</option>
-            </select>
-          </div>
-          <div class="booking-field">
-            <label for="children">CHILDREN</label>
-            <select id="children" name="children">
-              <option value="0" selected>어린이 0명</option>
-              <option value="1">어린이 1명</option>
-              <option value="2">어린이 2명</option>
-              <option value="3">어린이 3명</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary" id="bookingSubmit">객실 조회</button>
-        </form>
-        <p class="booking-error is-hidden" id="bookingError" role="alert"></p>
+      <!-- 접속 시각 즉시 초기화: 화면이 그려지기 전에 바로 SUNSET/NIGHT 상태로 세팅 (DAY 깜빡임 방지) -->
+      <script>
+        (function () {
+          var hour = new Date().getHours();
+          var theme = (hour >= 6 && hour < 17) ? "day" : ((hour >= 17 && hour < 20) ? "sunset" : "night");
+          window.__INITIAL_THEME__ = theme;
+
+          var THEMES = {
+            day: {
+              eyebrow: "WYNDHAM GOSEONG · INFINITY POOL",
+              title: "ENDLESS BLUE,<br>PERFECT MOMENT",
+              desc: "청정 동해 바다와 맞닿은 루프탑 인피니티 풀에서 눈부신 햇살과 함께 온전한 휴식을 경험하세요."
+            },
+            sunset: {
+              eyebrow: "GOLDEN TWILIGHT IN GOSEONG",
+              title: "BURNING SKY,<br>ROMANTIC TIDE",
+              desc: "설악산과 고성 바다가 붉고 찬란한 보랏빛으로 물드는 시간. 노을빛이 수면에 일렁이는 로맨틱한 순간을 마주합니다."
+            },
+            night: {
+              eyebrow: "STARLIT NIGHT OCEAN",
+              title: "WHISPERING WAVES,<br>SILENT LUXURY",
+              desc: "은은한 수중 조명과 쏟아지는 별빛 아래, 파도 소리만이 고요히 흐르는 밤의 인피니티 풀에서 감미로운 휴식을 취하세요."
+            }
+          };
+
+          // 1. 배경 레이어 즉시 활성화 (HTML 파싱 중 동기 반영)
+          var layers = document.querySelectorAll(".hero-bg-layer");
+          for (var i = 0; i < layers.length; i++) {
+            var match = (layers[i].getAttribute("data-theme-layer") === theme);
+            if (match) {
+              layers[i].classList.add("is-active");
+            } else {
+              layers[i].classList.remove("is-active");
+            }
+          }
+
+          // 2. 버튼 상태 즉시 활성화
+          var btns = document.querySelectorAll(".time-btn");
+          for (var j = 0; j < btns.length; j++) {
+            var active = (btns[j].getAttribute("data-time") === theme);
+            btns[j].classList.toggle("is-active", active);
+            btns[j].setAttribute("aria-selected", active ? "true" : "false");
+            btns[j].tabIndex = active ? 0 : -1;
+          }
+
+          // 3. 텍스트 카피 즉시 교체
+          var hero = document.getElementById("booking") || document.querySelector(".hero");
+          if (hero) {
+            var data = THEMES[theme];
+            var eye = hero.querySelector(".eyebrow");
+            var h1 = hero.querySelector("h1");
+            var p = hero.querySelector("p");
+            if (eye) eye.textContent = data.eyebrow;
+            if (h1) h1.innerHTML = data.title;
+            if (p) p.textContent = data.desc;
+          }
+          document.body.setAttribute("data-theme", theme);
+        })();
+      </script>
+    </section>
+
+    <!-- ★ 빠른 예약(Quick Booking) 배너 : 사진을 가리지 않도록 사진 바로 아래에 여유 있는 텀을 두고 배치 -->
+    <section class="quick-booking-section" id="booking" aria-label="객실 빠른 예약">
+      <div class="inner">
+        <div class="booking-bar">
+          <form class="booking-form" id="bookingForm" aria-label="빠른 예약" novalidate>
+            <div class="booking-field">
+              <label for="checkIn">CHECK-IN</label>
+              <input type="date" id="checkIn" name="checkIn" required>
+            </div>
+            <div class="booking-field">
+              <label for="checkOut">CHECK-OUT <output id="nightsOutput" class="booking-night" for="checkIn checkOut"></output></label>
+              <input type="date" id="checkOut" name="checkOut" required>
+            </div>
+            <div class="booking-field">
+              <label for="rooms">ROOMS</label>
+              <select id="rooms" name="rooms">
+                <option value="1" selected>객실 1개</option>
+                <option value="2">객실 2개</option>
+                <option value="3">객실 3개</option>
+                <option value="4">객실 4개</option>
+              </select>
+            </div>
+            <div class="booking-field">
+              <label for="adults">ADULTS</label>
+              <select id="adults" name="adults">
+                <option value="1">성인 1명</option>
+                <option value="2" selected>성인 2명</option>
+                <option value="3">성인 3명</option>
+                <option value="4">성인 4명</option>
+              </select>
+            </div>
+            <div class="booking-field">
+              <label for="children">CHILDREN</label>
+              <select id="children" name="children">
+                <option value="0" selected>어린이 0명</option>
+                <option value="1">어린이 1명</option>
+                <option value="2">어린이 2명</option>
+                <option value="3">어린이 3명</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="bookingSubmit">객실 조회</button>
+          </form>
+          <p class="booking-error is-hidden" id="bookingError" role="alert"></p>
+        </div>
       </div>
     </section>
 
@@ -183,10 +268,47 @@
           <p>머무는 시간을 더욱 특별하게 만드는 부대시설 <a href="facilities.html" class="text-link">시설 자세히 보기 &gt;</a></p>
         </div>
         <div class="fac-grid">
-          <div class="fac-item reveal"><div class="icon">🏊</div><h3>POOL</h3><p>인피니티 · 프라이빗 · 키즈</p></div>
-          <div class="fac-item reveal"><div class="icon">🍽️</div><h3>DINING</h3><p>시그니처 레스토랑 &amp; 라운지</p></div>
-          <div class="fac-item reveal"><div class="icon">💪</div><h3>FITNESS</h3><p>오션뷰 피트니스 센터</p></div>
-          <div class="fac-item reveal"><div class="icon">🎉</div><h3>BANQUET</h3><p>웨딩 · 비즈니스 연회장</p></div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 26c3-4 6-6 9-6s6 2 9 6 6 6 9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M6 20c3-4 6-6 9-6s6 2 9 6 6 6 9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
+                <circle cx="20" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>POOL</h3><p>인피니티 · 프라이빗 · 키즈</p>
+          </div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 8v8a6 6 0 0 0 12 0V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="20" y1="22" x2="20" y2="32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="15" y1="32" x2="25" y2="32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="14" y1="12" x2="14" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="26" y1="12" x2="26" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>DINING</h3><p>시그니처 레스토랑 &amp; 라운지</p>
+          </div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="17" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="26" y="17" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <line x1="14" y1="20" x2="26" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="3" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>FITNESS</h3><p>오션뷰 피트니스 센터</p>
+          </div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="20,8 24,16 33,17 27,23 28,32 20,28 12,32 13,23 7,17 16,16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>BANQUET</h3><p>웨딩 · 비즈니스 연회장</p>
+          </div>
         </div>
       </div>
     </section>
@@ -219,6 +341,18 @@
   <script src="js/components/header.js"></script>
   <script src="js/components/reveal.js"></script>
   <script src="js/components/booking-bar.js"></script>
+  <script src="js/components/wave-reveal.js"></script>
+  <script src="js/components/time-ambient.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.Hotel && window.Hotel.WaveReveal) {
+        window.Hotel.WaveReveal.init();
+      }
+      if (window.Hotel && window.Hotel.TimeAmbient) {
+        window.Hotel.TimeAmbient.init();
+      }
+    });
+  </script>
 </body>
 </html>

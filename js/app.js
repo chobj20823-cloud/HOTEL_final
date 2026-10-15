@@ -7,5 +7,6 @@
     H.Header.init();
     H.Reveal.init();
     H.BookingBar.init();
+    if (H.TimeAmbient) H.TimeAmbient.init();
   });
 })(window);
