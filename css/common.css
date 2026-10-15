@@ -70,7 +70,12 @@
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 body {
   font-family: var(--font-body);
@@ -78,6 +83,8 @@ body {
   background: var(--white);         /* ★ 메인 배경색: 화이트 */
   line-height: 1.7;
   word-break: keep-all;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 img { display: block; max-width: 100%; }
