@@ -234,9 +234,11 @@ main {
 }
 .hero-content .eyebrow {
   font-family: var(--font-display);
-  letter-spacing: 0.35em;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
   color: var(--color-sky-blue);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   display: block;
   text-shadow: 0 2px 10px rgba(32, 56, 75, 0.6);
   transition: color 0.6s ease;
@@ -252,25 +254,27 @@ body[data-theme="night"] .hero-content .eyebrow {
 
 .hero-content h1 {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.4rem, 7vw, 5.4rem);
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-  text-shadow: 0 4px 24px rgba(15, 23, 42, 0.65);
+  font-weight: 400;                     /* 두께를 600 -> 400으로 얇게 조절 */
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem); /* 크기를 절제된 비율로 축소 */
+  letter-spacing: 0.1em;                /* 자간을 넓혀 고급스러운 여백미 */
+  line-height: 1.25;
+  text-shadow: 0 3px 20px rgba(15, 23, 42, 0.55);
 }
 .hero-content p {
-  margin: 24px auto 32px;
-  max-width: 620px;
-  font-size: 1.1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  text-shadow: 0 2px 12px rgba(15, 23, 42, 0.65);
+  margin: 20px auto 28px;
+  max-width: 520px;
+  font-size: 0.98rem;                   /* 1.1rem -> 0.98rem 로 슬림화 */
+  font-weight: 300;                     /* 400 -> 300 라이트 굵기 */
+  line-height: 1.75;
+  opacity: 0.92;
+  text-shadow: 0 2px 12px rgba(15, 23, 42, 0.55);
 }
 .more-link {
   font-family: var(--font-display);
-  letter-spacing: 0.1em;
-  border-bottom: 1px solid var(--white);
-  padding-bottom: 2px;
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+  padding-bottom: 3px;
   text-shadow: 0 2px 10px rgba(32, 56, 75, 0.5);
   transition: color var(--transition), border-color var(--transition), transform var(--transition);
   display: inline-block;
