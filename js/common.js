@@ -7,11 +7,62 @@
 (function (global) {
   const Hotel = global.Hotel || {};
 
-  /** 객실 데이터 (수정 방지를 위해 freeze) */
+  /** 윈덤 강원고성 객실 데이터 (전체 6개 시그니처 룸 동기화) */
   Hotel.ROOMS = Object.freeze([
-    Object.freeze({ id: "deluxe", name: "디럭스 오션", desc: "침대 1 · 최대 2인 · 32㎡ · 오션뷰", price: 220000, image: "images/ref/img_room1.jpg", capacity: 2 }),
-    Object.freeze({ id: "premier", name: "프리미어 오션", desc: "침대 2 · 최대 3인 · 42㎡ · 파노라마 오션뷰", price: 320000, image: "images/ref/img_room2.jpg", capacity: 3 }),
-    Object.freeze({ id: "suite", name: "스카이 스위트", desc: "침대 2 · 최대 4인 · 66㎡ · 프라이빗 테라스", price: 520000, image: "images/ref/img_room_detail_top1.png", capacity: 4 })
+    Object.freeze({
+      id: "deluxe-king",
+      aliases: ["deluxe", "king"],
+      name: "디럭스 오션 킹",
+      desc: "시몬스 뷰티레스트 프리미엄 킹 · 전면 오션뷰 · 36㎡ (약 11평)",
+      price: 240000,
+      image: "images/rooms/room_top1.png",
+      capacity: 2
+    }),
+    Object.freeze({
+      id: "deluxe-twin",
+      aliases: ["twin"],
+      name: "디럭스 오션 트윈",
+      desc: "독립 슈퍼싱글 베드 2개 · 발코니 티테이블 · 38㎡ (약 11.5평)",
+      price: 260000,
+      image: "images/rooms/room_top4.png",
+      capacity: 3
+    }),
+    Object.freeze({
+      id: "premier-terrace",
+      aliases: ["premier", "terrace"],
+      name: "프리미어 오션 테라스",
+      desc: "광폭 테라스 · 독립형 바다 조망 욕조 · 48㎡ (약 14.5평)",
+      price: 350000,
+      image: "images/rooms/room_top7.png",
+      capacity: 3
+    }),
+    Object.freeze({
+      id: "executive-suite",
+      aliases: ["suite", "executive"],
+      name: "이그제큐티브 스위트",
+      desc: "침실·거실 분리형 · EFL 라운지 2인 무료 · 월풀 스파 · 72㎡ (약 22평)",
+      price: 520000,
+      image: "images/rooms/efl_top1.png",
+      capacity: 3
+    }),
+    Object.freeze({
+      id: "family-suite",
+      aliases: ["family"],
+      name: "패밀리 오션 스위트",
+      desc: "2베드룸 (킹1+싱글2)+2욕실 · 6인 다이닝 · 85㎡ (약 26평)",
+      price: 610000,
+      image: "images/rooms/room_top10.png",
+      capacity: 6
+    }),
+    Object.freeze({
+      id: "presidential-penthouse",
+      aliases: ["penthouse", "presidential"],
+      name: "프레지덴셜 펜트하우스",
+      desc: "28층 최상층 단독 · 루프탑 야외 자쿠지 풀 · 전담 버틀러 VIP · 145㎡ (약 44평)",
+      price: 1400000,
+      image: "images/rooms/efl_top4.png",
+      capacity: 6
+    })
   ]);
 
   Hotel.Util = Object.freeze({

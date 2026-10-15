@@ -1,18 +1,19 @@
 "use strict";
 
 /**
- * reservation-flow.js – 예약 페이지의 단계별 진행 (일정 → 객실 → 정보 → 완료)
+ * reservation-flow.js – 예약 페이지의 단계별 진행
  * ---------------------------------------------------------------------------
- * - 메인페이지에서 넘어온 값은 URL 쿼리(checkIn, checkOut, rooms, adults, children, room)로 받습니다.
- *   예) reservation.html?checkIn=2026-10-20&checkOut=2026-10-22&rooms=1&adults=2&children=0&room=deluxe
- * - 예약 내역은 localStorage("hotelReservations")에 저장됩니다. (샘플: 실제 서버 연동 없음)
+ * - rooms.html에서 [이 객실 예약하기] 클릭 시 (?room=...):
+ *   방은 이미 골랐으므로 ① 일정·인원 선택 화면에서 시작하고,
+ *   일정 선택 완료 시 ② 객실 선택을 건너뛰고 바로 ③ 정보 입력 단계로 넘어갑니다. (1번 -> 3번)
+ * - 일반 접속 시: ① 일정·인원 -> ② 객실 선택 -> ③ 정보 입력 -> ④ 예약 완료
  */
 (function (global) {
   const U = global.Hotel.Util;
   const STORAGE_KEY = "hotelReservations";
 
-  // 현재 진행 상태 (search: 일정/인원, room: 선택한 객실, step: 현재 단계 1~4)
-  const state = { search: null, room: null, step: 1 };
+  // 현재 진행 상태 (search: 일정/인원, room: 선택한 객실, step: 현재 단계 1~4, fromRoomPage: 룸페이지에서 넘어왔는지 여부)
+  const state = { search: null, room: null, step: 1, fromRoomPage: false };
 
   /** 날짜/인원 폼 값을 읽어 검증합니다. */
   function readSearchForm() {
@@ -83,26 +84,34 @@
   /** STEP2: 객실 목록 렌더링 (인원이 정원을 넘으면 선택 불가) */
   function renderRooms() {
     const s = state.search;
+    if (!s) return;
     const guests = s.adults + s.children;
     U.qs("#roomList").innerHTML = global.Hotel.ROOMS.map(function (room) {
       const total = room.price * s.nights * s.rooms;
       const tooMany = guests > room.capacity * s.rooms;
-      return '<article class="room-option">' +
+      const isSelected = state.room && state.room.id === room.id;
+      return '<article class="room-option' + (isSelected ? " is-selected" : "") + '">' +
         '<img src="' + U.escapeHtml(room.image) + '" alt="' + U.escapeHtml(room.name) + '">' +
         "<div><h3>" + U.escapeHtml(room.name) + "</h3><p>" + U.escapeHtml(room.desc) + "</p></div>" +
         '<div class="total"><strong>' + U.formatPrice(total) + "</strong>" +
         "<small>1박 " + U.formatPrice(room.price) + " × " + s.nights + "박 × " + s.rooms + "개</small>" +
         (tooMany
           ? '<span class="field-error">최대 ' + (room.capacity * s.rooms) + "인</span>"
-          : '<button type="button" class="btn btn-primary" data-room-id="' + U.escapeHtml(room.id) + '">선택</button>') +
+          : (isSelected
+              ? '<button type="button" class="btn btn-primary" data-room-id="' + U.escapeHtml(room.id) + '">선택됨 ✓</button>'
+              : '<button type="button" class="btn btn-primary" data-room-id="' + U.escapeHtml(room.id) + '">선택</button>')) +
         "</div></article>";
     }).join("");
   }
 
   function selectRoom(roomId) {
-    const room = global.Hotel.ROOMS.find(function (r) { return r.id === roomId; });
-    if (!room || !state.search) { return false; }
-    if (state.search.adults + state.search.children > room.capacity * state.search.rooms) { return false; }
+    const room = global.Hotel.ROOMS.find(function (r) {
+      return r.id === roomId || (r.aliases && r.aliases.indexOf(roomId) !== -1);
+    });
+    if (!room) { return false; }
+    if (state.search && (state.search.adults + state.search.children > room.capacity * state.search.rooms)) {
+      return false;
+    }
     state.room = room;
     return true;
   }
@@ -189,7 +198,6 @@
     ["rooms", "adults", "children"].forEach(function (key) {
       const sel = U.qs("#rs" + key.charAt(0).toUpperCase() + key.slice(1));
       const val = params.get(key);
-      // 허용된 옵션 값일 때만 적용 (이상한 쿼리 값 방어)
       if (sel && val && Array.prototype.some.call(sel.options, function (o) { return o.value === val; })) { sel.value = val; }
     });
   }
@@ -205,6 +213,42 @@
 
       const inEl = U.qs("#rsCheckIn");
       const outEl = U.qs("#rsCheckOut");
+      const submitBtn = U.qs("#btnSearchSubmit");
+      const bannerEl = U.qs("#selectedRoomBanner");
+      const bannerName = U.qs("#selectedRoomName");
+      const bannerDesc = U.qs("#selectedRoomDesc");
+
+      // 초기 검색 상태 생성
+      const initResult = readSearchForm();
+      if (initResult.data) {
+        state.search = initResult.data;
+      }
+
+      // 룸 페이지에서 넘어온 파라미터 체크 (예: ?room=deluxe-king)
+      const roomParam = params.get("room");
+      if (roomParam && selectRoom(roomParam)) {
+        state.fromRoomPage = true;
+        // 상단 배너 표시
+        if (bannerEl && bannerName && bannerDesc) {
+          bannerName.textContent = " " + state.room.name;
+          bannerDesc.textContent = state.room.desc + " · 1박 " + U.formatPrice(state.room.price);
+          bannerEl.classList.remove("is-hidden");
+        }
+        // 버튼 텍스트 변경
+        if (submitBtn) {
+          submitBtn.textContent = "다음 (예약자 정보 입력) ➔";
+        }
+      }
+
+      // 날짜/인원 실시간 변경 시 우측 요약 및 총 금액 즉시 재계산
+      searchForm.addEventListener("change", function () {
+        showSearchError("");
+        const res = readSearchForm();
+        if (res.data) {
+          state.search = res.data;
+          renderSummary();
+        }
+      });
 
       // 체크인 변경 → 체크아웃 최소값/값 자동 보정
       inEl.addEventListener("change", function () {
@@ -213,8 +257,10 @@
         const minOut = U.toISODate(U.addDays(U.parseISODate(inEl.value), 1));
         outEl.min = minOut;
         if (!outEl.value || outEl.value < minOut) { outEl.value = minOut; }
+        const res = readSearchForm();
+        if (res.data) { state.search = res.data; renderSummary(); }
       });
-      // 체크아웃을 체크인보다 앞/같은 날로 입력 → 보정 + 안내
+
       outEl.addEventListener("change", function () {
         showSearchError("");
         if (!inEl.value || !outEl.value) { return; }
@@ -223,46 +269,61 @@
           outEl.value = minOut;
           showSearchError("체크아웃은 체크인 다음 날부터 선택할 수 있어 날짜를 조정했습니다.");
         }
+        const res = readSearchForm();
+        if (res.data) { state.search = res.data; renderSummary(); }
       });
 
-      // STEP1 제출: 객실 조회
+      // STEP 1 제출
       searchForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const result = readSearchForm();
         if (!result.data) { showSearchError(result.error); return; }
         showSearchError("");
         state.search = result.data;
+
+        // 룸페이지에서 방을 골라서 들어온 경우: 1번 -> 3번으로 직행
+        if (state.fromRoomPage && state.room) {
+          const guests = state.search.adults + state.search.children;
+          const maxCap = state.room.capacity * state.search.rooms;
+          if (guests > maxCap) {
+            showSearchError(state.room.name + "의 최대 정원은 객실당 " + state.room.capacity + "명 (총 " + maxCap + "명)입니다. 객실 수를 늘리거나 인원을 조정해 주세요.");
+            return;
+          }
+          setStep(3);
+          return;
+        }
+
+        // 일반 접속인 경우: 1번 -> 2번 객실 선택
         state.room = null;
         renderRooms();
         setStep(2);
       });
 
-      // STEP2: 객실 선택 (이벤트 위임)
+      // STEP 2: 객실 선택 (이벤트 위임)
       U.qs("#roomList").addEventListener("click", function (e) {
         const btn = e.target.closest("[data-room-id]");
         if (btn && selectRoom(btn.dataset.roomId)) { setStep(3); }
       });
 
-      // 이전 버튼 (이벤트 위임)
+      // 이전 버튼 클릭 시
       document.addEventListener("click", function (e) {
-        if (e.target.closest("[data-step-back]")) { setStep(Math.max(1, state.step - 1)); }
+        if (e.target.closest("[data-step-back]")) {
+          // 룸페이지에서 1->3으로 직행한 경우, 3에서 '이전' 누르면 1번(일정/인원)으로 복귀
+          if (state.step === 3 && state.fromRoomPage) {
+            setStep(1);
+          } else {
+            setStep(Math.max(1, state.step - 1));
+          }
+        }
       });
 
-      // STEP3 제출: 예약 확정
-      guestForm.addEventListener("submit", function (e) { e.preventDefault(); submitReservation(guestForm); });
+      // STEP 3 제출: 예약 확정
+      guestForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        submitReservation(guestForm);
+      });
 
-      // 메인에서 넘어온 값이 유효하면 바로 다음 단계로 이동
-      if (params.get("checkIn") && params.get("checkOut")) {
-        const result = readSearchForm();
-        if (result.data) {
-          state.search = result.data;
-          renderRooms();
-          const preset = params.get("room");
-          setStep(preset && selectRoom(preset) ? 3 : 2);
-          return;
-        }
-        showSearchError(result.error);
-      }
+      // 룸페이지에서 넘어왔든 직접 접속했든 언제나 1번(일정·인원)부터 시작
       setStep(1);
       window.scrollTo(0, 0);
     }

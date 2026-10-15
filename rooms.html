@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROOMS 객실 안내 | WYNDHAM GOSEONG GANGWON</title>
-  <meta name="description" content="윈덤 강원고성의 디럭스 오션, 프리미어 오션, 스카이 스위트 객실을 소개합니다. 모든 객실에서 동해 바다를 마주하세요.">
+  <meta name="description" content="윈덤 강원고성의 전 객실 오션뷰 쇼룸을 만나보세요. 디럭스, 프리미어, 이그제큐티브 스위트부터 프레지덴셜 펜트하우스까지 동해의 수평선과 함께합니다.">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/sub.css">
+  <link rel="stylesheet" href="css/rooms.css">
 </head>
 <body>
   <header class="header" id="header">
@@ -33,8 +34,9 @@
   </header>
 
   <main>
+    <!-- 서브 히어로 (다른 서브페이지와 동일하게 100vh 풀스크린으로 한 화면 가득 채움) -->
     <section class="sub-hero">
-      <img src="images/ref/img_room_detail_top2.png" alt="오션뷰 객실 내부" class="sub-hero-bg">
+      <img src="images/rooms/room_top2.png" alt="윈덤 강원고성 오션뷰 객실 전경" class="sub-hero-bg">
       <div class="inner sub-hero-content">
         <ol class="breadcrumb" aria-label="현재 위치">
           <li><a href="index.html">HOME</a></li>
@@ -46,120 +48,553 @@
       </div>
     </section>
 
-
-    <!-- 객실 타입 탭 (js/components/tabs.js) -->
+    <!-- 객실 상세 쇼룸 섹션 -->
     <section class="section">
       <div class="inner">
+        <!-- 1. 시그니쳐 컬렉션 소개 헤더 -->
         <div class="sub-intro is-spaced reveal">
-          <span class="eyebrow">ROOM TYPE</span>
-          <h2>바다와 가장 가까운 휴식</h2>
-          <p>여유로운 커플 여행부터 가족 단위 휴가까지, 머무는 목적에 맞는 객실을 선택하세요.</p>
+          <span class="eyebrow">SIGNATURE COLLECTION</span>
+          <h2>바다와 가장 가까운 온전한 휴식</h2>
+          <p>여유로운 커플 여행부터 가족 단위 휴가까지, 머무는 목적에 맞는 객실을 선택하세요.<br>사진의 반투명 좌우 화살표를 클릭하거나 하단 썸네일을 눌러 침실, 거실, 욕실 공간을 둘러보실 수 있습니다.</p>
         </div>
 
-        <div data-tabs>
-          <div class="tab-list" role="tablist" aria-label="객실 타입">
-            <button type="button" class="tab-btn" role="tab" id="tab-deluxe" data-tab="deluxe" aria-controls="panel-deluxe" aria-selected="true">디럭스 오션</button>
-            <button type="button" class="tab-btn" role="tab" id="tab-premier" data-tab="premier" aria-controls="panel-premier" aria-selected="false" tabindex="-1">프리미어 오션</button>
-            <button type="button" class="tab-btn" role="tab" id="tab-suite" data-tab="suite" aria-controls="panel-suite" aria-selected="false" tabindex="-1">스카이 스위트</button>
-          </div>
+        <!-- 2. 알약 네비게이션: 시그니쳐 컬렉션과 방 구성 사이에 위치 -->
+        <nav class="room-quick-nav-wrap" aria-label="객실 타입 빠른 탐색">
+          <ul class="room-quick-nav">
+            <li><a href="#deluxe-king" class="room-nav-link is-active">디럭스 킹</a></li>
+            <li><a href="#deluxe-twin" class="room-nav-link">디럭스 트윈</a></li>
+            <li><a href="#premier-terrace" class="room-nav-link">프리미어 테라스</a></li>
+            <li><a href="#executive-suite" class="room-nav-link">이그제큐티브 스위트</a></li>
+            <li><a href="#family-suite" class="room-nav-link">패밀리 스위트</a></li>
+            <li><a href="#presidential-penthouse" class="room-nav-link">프레지덴셜 펜트하우스</a></li>
+          </ul>
+        </nav>
 
-          <!-- DELUXE -->
-          <section class="tab-panel" role="tabpanel" id="panel-deluxe" data-tab-panel="deluxe" aria-labelledby="tab-deluxe">
-            <div class="detail-row">
-              <div class="detail-media">
-                <img src="images/ref/img_room1.jpg" alt="디럭스 오션 객실">
+        <!-- 3. 방 화면 구성 (쇼룸 카드 피드) -->
+        <div class="room-showroom-list">
+
+          <!-- 1. 디럭스 오션 킹 -->
+          <article class="room-card-box reveal" id="deluxe-king">
+            <div class="room-card-layout">
+              <!-- 좌측 인터랙티브 갤러리 (좌측 상단 알약 제거, 반투명 좌우 화살표 + 5장 사진) -->
+              <div class="room-gallery-col">
+                <div class="room-gallery-main">
+                  <button type="button" class="room-gallery-arrow prev" aria-label="이전 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" class="room-gallery-arrow next" aria-label="다음 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                  <img src="images/rooms/room_top1.png" alt="디럭스 오션 킹 침실 전경" loading="lazy">
+                </div>
+                <div class="room-gallery-thumbs" role="group" aria-label="디럭스 오션 킹 사진 둘러보기">
+                  <button type="button" class="room-thumb-btn is-active" data-full="images/rooms/room_top1.png" aria-label="침실 전경">
+                    <img src="images/rooms/room_top1.png" alt="침실 전경">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top2.png" aria-label="발코니 오션뷰">
+                    <img src="images/rooms/room_top2.png" alt="발코니 오션뷰">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top3.png" aria-label="휴식 공간">
+                    <img src="images/rooms/room_top3.png" alt="휴식 공간">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath1.jpg" aria-label="오션뷰 욕실">
+                    <img src="images/rooms/room_bath1.jpg" alt="오션뷰 욕실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/ref/img_room1.jpg" aria-label="샤워 & 어메니티">
+                    <img src="images/ref/img_room1.jpg" alt="샤워 & 어메니티">
+                  </button>
+                </div>
               </div>
-              <div class="detail-text">
-                <span class="eyebrow">DELUXE OCEAN</span>
-                <h3>디럭스 오션</h3>
-                <p>통창 너머로 동해를 감상할 수 있는 기본 객실입니다. 차분한 톤의 인테리어와 킹 사이즈 베드로 두 사람을 위한 완벽한 휴식을 선사합니다.</p>
-                <dl class="spec-list">
-                  <div><dt>침대</dt><dd>킹 1</dd></div>
-                  <div><dt>인원</dt><dd>기준 2인 / 최대 2인</dd></div>
-                  <div><dt>면적</dt><dd>32㎡</dd></div>
-                  <div><dt>전망</dt><dd>오션뷰</dd></div>
-                  <div><dt>체크인</dt><dd>15:00</dd></div>
-                  <div><dt>체크아웃</dt><dd>11:00</dd></div>
-                </dl>
-                <ul class="amenity-list">
-                  <li>55" 스마트 TV</li><li>네스프레소 머신</li><li>미니 냉장고</li><li>욕조</li><li>무료 Wi-Fi</li>
-                </ul>
-                <div class="price-line">
-                  <strong>220,000원 <small>/ 1박~</small></strong>
-                  <a href="reservation.html" class="btn btn-primary">이 객실 예약하기</a>
+
+              <!-- 우측 상세 정보 -->
+              <div class="room-details-col">
+                <span class="eyebrow">DELUXE OCEAN KING</span>
+                <h3>디럭스 오션 킹</h3>
+                <p class="room-desc">
+                  통창 너머로 동해의 일출과 수평선이 막힘없이 펼쳐지는 윈덤 고성의 대표 시그니처 룸입니다. 
+                  최고급 시몬스 뷰티레스트 프리미엄 킹 베드와 아늑한 원목 톤 인테리어로 온전한 쉼을 완성합니다.
+                </p>
+
+                <div class="room-spec-grid">
+                  <div class="room-spec-item"><span class="label">면적</span><span class="val">36㎡ (약 11평)</span></div>
+                  <div class="room-spec-item"><span class="label">침대</span><span class="val">시몬스 뷰티레스트 킹 1개</span></div>
+                  <div class="room-spec-item"><span class="label">정원</span><span class="val">기준 2인 / 최대 2인</span></div>
+                  <div class="room-spec-item"><span class="label">전망</span><span class="val">동해 파노라마 전면 오션뷰</span></div>
+                  <div class="room-spec-item"><span class="label">층수</span><span class="val">7층 ~ 18층 배정</span></div>
+                  <div class="room-spec-item"><span class="label">시간</span><span class="val">체크인 15:00 / 체크아웃 11:00</span></div>
+                </div>
+
+                <div class="room-amenities-wrap">
+                  <span class="room-amenity-chip">✓ 시몬스 뷰티레스트 킹</span>
+                  <span class="room-amenity-chip">✓ 프라이빗 오션 발코니</span>
+                  <span class="room-amenity-chip">✓ 몰튼 브라운 어메니티</span>
+                  <span class="room-amenity-chip">✓ 네스프레소 캡슐 머신</span>
+                  <span class="room-amenity-chip">✓ 55" 스마트 TV</span>
+                </div>
+
+                <!-- 상세 사양 드로어 -->
+                <button type="button" class="room-drawer-trigger" data-target="drawer-king" aria-expanded="false">
+                  <span class="drawer-label">객실 상세 사양 &amp; 어메니티 펼치기</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="room-drawer-content" id="drawer-king">
+                  <div class="room-drawer-section">
+                    <strong>객실 구성 &amp; 시설</strong>
+                    <p>침실 1, 프라이빗 발코니 1, 바다 조망 독립 욕조, 독립 샤워부스 및 비데 화장실 1, 작업용 데스크 및 라운지 체어</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>침구 &amp; 편의용품</strong>
+                    <p>최고급 구스다운 이불 및 베개 셀렉션, 프리미엄 목욕 가운, 슬리퍼, 개인 금고, 미니 냉장고, 무료 생수 2병, 전기 포트</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>미디어 &amp; 통신</strong>
+                    <p>초고속 무료 기가 Wi-Fi, OTT 스트리밍 지원 스마트 TV, 블루투스 스피커, 멀티 플러그</p>
+                  </div>
+                </div>
+
+                <div class="room-price-action-bar">
+                  <div class="room-price-box">
+                    <span class="room-price-label">1박 기준 최저 요금</span>
+                    <span class="room-price-value">240,000원~ <small>/ 1박</small></span>
+                  </div>
+                  <a href="reservation.html?room=deluxe-king" class="btn btn-primary">이 객실 예약하기</a>
                 </div>
               </div>
             </div>
-          </section>
+          </article>
 
-          <!-- PREMIER -->
-          <section class="tab-panel" role="tabpanel" id="panel-premier" data-tab-panel="premier" aria-labelledby="tab-premier" hidden>
-            <div class="detail-row">
-              <div class="detail-media">
-                <img src="images/ref/img_room2.jpg" alt="프리미어 오션 객실">
+          <!-- 2. 디럭스 오션 트윈 -->
+          <article class="room-card-box reveal" id="deluxe-twin">
+            <div class="room-card-layout">
+              <div class="room-gallery-col">
+                <div class="room-gallery-main">
+                  <button type="button" class="room-gallery-arrow prev" aria-label="이전 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" class="room-gallery-arrow next" aria-label="다음 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                  <img src="images/rooms/room_top4.png" alt="디럭스 오션 트윈 침실 전경" loading="lazy">
+                </div>
+                <div class="room-gallery-thumbs" role="group" aria-label="디럭스 오션 트윈 사진 둘러보기">
+                  <button type="button" class="room-thumb-btn is-active" data-full="images/rooms/room_top4.png" aria-label="트윈 침실 전경">
+                    <img src="images/rooms/room_top4.png" alt="트윈 침실 전경">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top5.png" aria-label="발코니 오션뷰">
+                    <img src="images/rooms/room_top5.png" alt="발코니 오션뷰">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top6.png" aria-label="다이닝 & 소파">
+                    <img src="images/rooms/room_top6.png" alt="다이닝 & 소파">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath1.jpg" aria-label="바다 조망 욕실">
+                    <img src="images/rooms/room_bath1.jpg" alt="바다 조망 욕실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top1.png" aria-label="내부 인테리어">
+                    <img src="images/rooms/room_top1.png" alt="내부 인테리어">
+                  </button>
+                </div>
               </div>
-              <div class="detail-text">
-                <span class="eyebrow">PREMIER OCEAN</span>
-                <h3>프리미어 오션</h3>
-                <p>고층부에 위치해 더욱 넓은 파노라마 오션뷰를 누릴 수 있습니다. 더블 베드 2개로 소규모 가족과 친구 여행에 알맞습니다.</p>
-                <dl class="spec-list">
-                  <div><dt>침대</dt><dd>더블 2</dd></div>
-                  <div><dt>인원</dt><dd>기준 2인 / 최대 3인</dd></div>
-                  <div><dt>면적</dt><dd>42㎡</dd></div>
-                  <div><dt>전망</dt><dd>파노라마 오션뷰</dd></div>
-                  <div><dt>체크인</dt><dd>15:00</dd></div>
-                  <div><dt>체크아웃</dt><dd>11:00</dd></div>
-                </dl>
-                <ul class="amenity-list">
-                  <li>65" 스마트 TV</li><li>네스프레소 머신</li><li>소파 라운지</li><li>욕조</li><li>무료 Wi-Fi</li><li>고층 배정</li>
-                </ul>
-                <div class="price-line">
-                  <strong>320,000원 <small>/ 1박~</small></strong>
-                  <a href="reservation.html" class="btn btn-primary">이 객실 예약하기</a>
+
+              <div class="room-details-col">
+                <span class="eyebrow">DELUXE OCEAN TWIN</span>
+                <h3>디럭스 오션 트윈</h3>
+                <p class="room-desc">
+                  친구 또는 동료와의 여행에 최적화된 독립된 슈퍼싱글 베드 2개가 배치된 객실입니다. 
+                  아침에 눈을 뜨는 순간 동해 수평선의 일출이 펼쳐지며 쾌적하고 넉넉한 공간을 제공합니다.
+                </p>
+
+                <div class="room-spec-grid">
+                  <div class="room-spec-item"><span class="label">면적</span><span class="val">38㎡ (약 11.5평)</span></div>
+                  <div class="room-spec-item"><span class="label">침대</span><span class="val">독립 슈퍼싱글 베드 2개</span></div>
+                  <div class="room-spec-item"><span class="label">정원</span><span class="val">기준 2인 / 최대 3인</span></div>
+                  <div class="room-spec-item"><span class="label">전망</span><span class="val">동해 파노라마 오션뷰</span></div>
+                  <div class="room-spec-item"><span class="label">층수</span><span class="val">7층 ~ 20층 배정</span></div>
+                  <div class="room-spec-item"><span class="label">시간</span><span class="val">체크인 15:00 / 체크아웃 11:00</span></div>
+                </div>
+
+                <div class="room-amenities-wrap">
+                  <span class="room-amenity-chip">✓ 독립 슈퍼싱글 2베드</span>
+                  <span class="room-amenity-chip">✓ 프라이빗 발코니 티테이블</span>
+                  <span class="room-amenity-chip">✓ 몰튼 브라운 프리미엄 어메니티</span>
+                  <span class="room-amenity-chip">✓ 비데 완비 샤워부스 & 욕조</span>
+                  <span class="room-amenity-chip">✓ 네스프레소 머신</span>
+                </div>
+
+                <button type="button" class="room-drawer-trigger" data-target="drawer-twin" aria-expanded="false">
+                  <span class="drawer-label">객실 상세 사양 &amp; 어메니티 펼치기</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="room-drawer-content" id="drawer-twin">
+                  <div class="room-drawer-section">
+                    <strong>객실 구성 &amp; 시설</strong>
+                    <p>침실 1(슈퍼싱글 2), 오션뷰 발코니 1, 비데 및 레인 샤워부스, 대리석 세면대, 티테이블 및 2인 암체어</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>침구 &amp; 편의용품</strong>
+                    <p>항알러지 구스다운 베딩, 프리미엄 코튼 배스타월, 페이스 타월, 헤어드라이어, 안전 금고, 슬리퍼</p>
+                  </div>
+                </div>
+
+                <div class="room-price-action-bar">
+                  <div class="room-price-box">
+                    <span class="room-price-label">1박 기준 최저 요금</span>
+                    <span class="room-price-value">260,000원~ <small>/ 1박</small></span>
+                  </div>
+                  <a href="reservation.html?room=deluxe-twin" class="btn btn-primary">이 객실 예약하기</a>
                 </div>
               </div>
             </div>
-          </section>
+          </article>
 
-          <!-- SUITE -->
-          <section class="tab-panel" role="tabpanel" id="panel-suite" data-tab-panel="suite" aria-labelledby="tab-suite" hidden>
-            <div class="detail-row">
-              <div class="detail-media">
-                <img src="images/ref/img_room_detail_top1.png" alt="스카이 스위트 객실">
+          <!-- 3. 프리미어 오션 테라스 -->
+          <article class="room-card-box reveal" id="premier-terrace">
+            <div class="room-card-layout">
+              <div class="room-gallery-col">
+                <div class="room-gallery-main">
+                  <button type="button" class="room-gallery-arrow prev" aria-label="이전 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" class="room-gallery-arrow next" aria-label="다음 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                  <img src="images/rooms/room_top7.png" alt="프리미어 오션 테라스 룸 전경" loading="lazy">
+                </div>
+                <div class="room-gallery-thumbs" role="group" aria-label="프리미어 오션 테라스 사진 둘러보기">
+                  <button type="button" class="room-thumb-btn is-active" data-full="images/rooms/room_top7.png" aria-label="와이드 테라스 룸">
+                    <img src="images/rooms/room_top7.png" alt="와이드 테라스 룸">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top8.png" aria-label="선셋 테라스 라운지">
+                    <img src="images/rooms/room_top8.png" alt="선셋 테라스 라운지">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top9.png" aria-label="릴랙스 휴식 공간">
+                    <img src="images/rooms/room_top9.png" alt="릴랙스 휴식 공간">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath1.jpg" aria-label="바다 조망 욕조">
+                    <img src="images/rooms/room_bath1.jpg" alt="바다 조망 욕조">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/ref/img_room2.jpg" aria-label="럭셔리 베스룸">
+                    <img src="images/ref/img_room2.jpg" alt="럭셔리 베스룸">
+                  </button>
+                </div>
               </div>
-              <div class="detail-text">
-                <span class="eyebrow">SKY SUITE</span>
-                <h3>스카이 스위트</h3>
-                <p>거실과 침실이 분리된 최상층 스위트. 프라이빗 테라스에서 일출과 바다, 설악산 울산바위를 한 번에 감상할 수 있습니다.</p>
-                <dl class="spec-list">
-                  <div><dt>침대</dt><dd>킹 1 + 더블 1</dd></div>
-                  <div><dt>인원</dt><dd>기준 2인 / 최대 4인</dd></div>
-                  <div><dt>면적</dt><dd>66㎡</dd></div>
-                  <div><dt>전망</dt><dd>오션 + 마운틴뷰</dd></div>
-                  <div><dt>체크인</dt><dd>15:00</dd></div>
-                  <div><dt>체크아웃</dt><dd>12:00</dd></div>
-                </dl>
-                <ul class="amenity-list">
-                  <li>프라이빗 테라스</li><li>분리형 거실</li><li>월풀 욕조</li><li>웰컴 와인</li><li>라운지 이용</li><li>무료 Wi-Fi</li>
-                </ul>
-                <div class="price-line">
-                  <strong>520,000원 <small>/ 1박~</small></strong>
-                  <a href="reservation.html" class="btn btn-primary">이 객실 예약하기</a>
+
+              <div class="room-details-col">
+                <span class="eyebrow">PREMIER OCEAN TERRACE</span>
+                <h3>프리미어 오션 테라스</h3>
+                <p class="room-desc">
+                  탁 트인 전용 광폭 야외 테라스를 갖추어 바닷바람과 파도 소리를 가장 생생하게 느낄 수 있는 객실입니다. 
+                  고층부에 배치되어 270도 파노라마 오션뷰와 독립형 욕조에서 낭만적인 입욕을 즐길 수 있습니다.
+                </p>
+
+                <div class="room-spec-grid">
+                  <div class="room-spec-item"><span class="label">면적</span><span class="val">48㎡ (약 14.5평) + 광폭 테라스</span></div>
+                  <div class="room-spec-item"><span class="label">침대</span><span class="val">킹 1개 또는 퀸 2개 선택</span></div>
+                  <div class="room-spec-item"><span class="label">정원</span><span class="val">기준 2인 / 최대 3인</span></div>
+                  <div class="room-spec-item"><span class="label">전망</span><span class="val">270° 파노라마 오션 & 테라스 뷰</span></div>
+                  <div class="room-spec-item"><span class="label">층수</span><span class="val">15층 ~ 23층 (고층부)</span></div>
+                  <div class="room-spec-item"><span class="label">시간</span><span class="val">체크인 15:00 / 체크아웃 11:00</span></div>
+                </div>
+
+                <div class="room-amenities-wrap">
+                  <span class="room-amenity-chip">✓ 프라이빗 광폭 테라스</span>
+                  <span class="room-amenity-chip">✓ 65" 스마트 UHD TV</span>
+                  <span class="room-amenity-chip">✓ 독립형 입욕 욕조</span>
+                  <span class="room-amenity-chip">✓ 프리미엄 웰컴 티 세트</span>
+                  <span class="room-amenity-chip">✓ 최고급 구스다운 침구</span>
+                </div>
+
+                <button type="button" class="room-drawer-trigger" data-target="drawer-terrace" aria-expanded="false">
+                  <span class="drawer-label">객실 상세 사양 &amp; 어메니티 펼치기</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="room-drawer-content" id="drawer-terrace">
+                  <div class="room-drawer-section">
+                    <strong>테라스 및 욕실 특화</strong>
+                    <p>아웃도어 라운지 체어 2개 및 티테이블 완비 야외 테라스, 바다 조망 독립 욕조, 레인 샤워부스, 비데</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>프리미엄 혜택</strong>
+                    <p>웰컴 티 & 스낵 바구니, 턴다운 서비스(사전 요청 시), 인피니티 풀 우선 입장 혜택</p>
+                  </div>
+                </div>
+
+                <div class="room-price-action-bar">
+                  <div class="room-price-box">
+                    <span class="room-price-label">1박 기준 최저 요금</span>
+                    <span class="room-price-value">350,000원~ <small>/ 1박</small></span>
+                  </div>
+                  <a href="reservation.html?room=premier-terrace" class="btn btn-primary">이 객실 예약하기</a>
                 </div>
               </div>
             </div>
-          </section>
+          </article>
+
+          <!-- 4. 이그제큐티브 스위트 (6장 사진) -->
+          <article class="room-card-box reveal" id="executive-suite">
+            <div class="room-card-layout">
+              <div class="room-gallery-col">
+                <div class="room-gallery-main">
+                  <button type="button" class="room-gallery-arrow prev" aria-label="이전 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" class="room-gallery-arrow next" aria-label="다음 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                  <img src="images/rooms/efl_top1.png" alt="이그제큐티브 스위트 거실 전경" loading="lazy">
+                </div>
+                <div class="room-gallery-thumbs" role="group" aria-label="이그제큐티브 스위트 사진 둘러보기">
+                  <button type="button" class="room-thumb-btn is-active" data-full="images/rooms/efl_top1.png" aria-label="스위트 독립 거실">
+                    <img src="images/rooms/efl_top1.png" alt="스위트 독립 거실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/efl_top2.png" aria-label="마스터 베드룸">
+                    <img src="images/rooms/efl_top2.png" alt="마스터 베드룸">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/efl_top3.png" aria-label="파노라마 다이닝">
+                    <img src="images/rooms/efl_top3.png" alt="파노라마 다이닝">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath2.jpg" aria-label="스파 욕실 & 더블 세면대">
+                    <img src="images/rooms/room_bath2.jpg" alt="스파 욕실 & 더블 세면대">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath1.jpg" aria-label="바다 조망 입욕 공간">
+                    <img src="images/rooms/room_bath1.jpg" alt="바다 조망 입욕 공간">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top2.png" aria-label="발코니 오션뷰">
+                    <img src="images/rooms/room_top2.png" alt="발코니 오션뷰">
+                  </button>
+                </div>
+              </div>
+
+              <div class="room-details-col">
+                <span class="eyebrow">EXECUTIVE OCEAN SUITE</span>
+                <h3>이그제큐티브 스위트</h3>
+                <p class="room-desc">
+                  침실과 거실이 완벽히 분리된 럭셔리 스위트 룸입니다. 고층부에서 바라보는 웅장한 동해 파노라마 뷰와 
+                  전용 이그제큐티브 라운지 무료 혜택(조식 및 해피아워)이 포함되어 최상의 호스피탈리티를 선사합니다.
+                </p>
+
+                <div class="room-spec-grid">
+                  <div class="room-spec-item"><span class="label">면적</span><span class="val">72㎡ (약 22평)</span></div>
+                  <div class="room-spec-item"><span class="label">침대</span><span class="val">시몬스 블랙라벨 킹 1개</span></div>
+                  <div class="room-spec-item"><span class="label">정원</span><span class="val">기준 2인 / 최대 3인</span></div>
+                  <div class="room-spec-item"><span class="label">전망</span><span class="val">전면 파노라마 오션뷰 (고층부)</span></div>
+                  <div class="room-spec-item"><span class="label">층수</span><span class="val">20층 ~ 26층 최상층부</span></div>
+                  <div class="room-spec-item"><span class="label">시간</span><span class="val">체크인 15:00 / 체크아웃 12:00</span></div>
+                </div>
+
+                <div class="room-amenities-wrap">
+                  <span class="room-amenity-chip">✓ 거실 &amp; 침실 분리형 스위트</span>
+                  <span class="room-amenity-chip">✓ EFL 라운지 2인 무료 (조식·해피아워)</span>
+                  <span class="room-amenity-chip">✓ 월풀 대리석 스파 욕조</span>
+                  <span class="room-amenity-chip">✓ 다이슨 슈퍼소닉 드라이어</span>
+                  <span class="room-amenity-chip">✓ 웰컴 샴페인 &amp; 과일</span>
+                </div>
+
+                <button type="button" class="room-drawer-trigger" data-target="drawer-suite" aria-expanded="false">
+                  <span class="drawer-label">객실 상세 사양 &amp; 어메니티 펼치기</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="room-drawer-content" id="drawer-suite">
+                  <div class="room-drawer-section">
+                    <strong>스위트 전용 특전</strong>
+                    <p>최상층 이그제큐티브 라운지 올데이 스낵 & 애프터눈 티, 이브닝 칵테일 해피아워 2인 무료, 12:00 레이트 체크아웃 보장</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>욕실 및 설비 사양</strong>
+                    <p>고층 오션뷰 월풀 마사지 대리석 욕조, 분리형 레인 샤워부스, 다이슨 슈퍼소닉 헤어스타일러, 네스프레소 버츄오 머신</p>
+                  </div>
+                </div>
+
+                <div class="room-price-action-bar">
+                  <div class="room-price-box">
+                    <span class="room-price-label">1박 기준 최저 요금</span>
+                    <span class="room-price-value">520,000원~ <small>/ 1박</small></span>
+                  </div>
+                  <a href="reservation.html?room=executive-suite" class="btn btn-primary">이 객실 예약하기</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. 패밀리 오션 스위트 (5장 사진) -->
+          <article class="room-card-box reveal" id="family-suite">
+            <div class="room-card-layout">
+              <div class="room-gallery-col">
+                <div class="room-gallery-main">
+                  <button type="button" class="room-gallery-arrow prev" aria-label="이전 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" class="room-gallery-arrow next" aria-label="다음 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                  <img src="images/rooms/room_top10.png" alt="패밀리 오션 스위트 전경" loading="lazy">
+                </div>
+                <div class="room-gallery-thumbs" role="group" aria-label="패밀리 오션 스위트 사진 둘러보기">
+                  <button type="button" class="room-thumb-btn is-active" data-full="images/rooms/room_top10.png" aria-label="패밀리 룸 전경">
+                    <img src="images/rooms/room_top10.png" alt="패밀리 룸 전경">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top3.png" aria-label="가족형 라운지 거실">
+                    <img src="images/rooms/room_top3.png" alt="가족형 라운지 거실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/efl_top4.png" aria-label="다이닝 테이블">
+                    <img src="images/rooms/efl_top4.png" alt="다이닝 테이블">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath2.jpg" aria-label="패밀리 마스터 욕실">
+                    <img src="images/rooms/room_bath2.jpg" alt="패밀리 마스터 욕실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top5.png" aria-label="와이드 테라스">
+                    <img src="images/rooms/room_top5.png" alt="와이드 테라스">
+                  </button>
+                </div>
+              </div>
+
+              <div class="room-details-col">
+                <span class="eyebrow">FAMILY OCEAN SUITE</span>
+                <h3>패밀리 오션 스위트</h3>
+                <p class="room-desc">
+                  부모님 또는 자녀와 함께하는 가족 여행을 위한 2베드룸 구성의 대형 스위트입니다. 
+                  동해의 오션뷰와 설악산 마운틴뷰를 동시에 감상할 수 있는 듀얼 뷰와 6인용 다이닝 공간을 구비했습니다.
+                </p>
+
+                <div class="room-spec-grid">
+                  <div class="room-spec-item"><span class="label">면적</span><span class="val">85㎡ (약 26평)</span></div>
+                  <div class="room-spec-item"><span class="label">침대</span><span class="val">킹 1개 + 슈퍼싱글 2개 (2베드룸)</span></div>
+                  <div class="room-spec-item"><span class="label">정원</span><span class="val">기준 4인 / 최대 6인</span></div>
+                  <div class="room-spec-item"><span class="label">전망</span><span class="val">동해 오션뷰 & 설악산 듀얼 뷰</span></div>
+                  <div class="room-spec-item"><span class="label">층수</span><span class="val">12층 ~ 24층 배정</span></div>
+                  <div class="room-spec-item"><span class="label">시간</span><span class="val">체크인 15:00 / 체크아웃 11:00</span></div>
+                </div>
+
+                <div class="room-amenities-wrap">
+                  <span class="room-amenity-chip">✓ 2베드룸 + 독립 2욕실</span>
+                  <span class="room-amenity-chip">✓ 6인용 다이닝 테이블</span>
+                  <span class="room-amenity-chip">✓ 키즈 어메니티 무료 제공</span>
+                  <span class="room-amenity-chip">✓ 스마트 UHD TV 2대</span>
+                  <span class="room-amenity-chip">✓ 패밀리 광폭 발코니</span>
+                </div>
+
+                <button type="button" class="room-drawer-trigger" data-target="drawer-family" aria-expanded="false">
+                  <span class="drawer-label">객실 상세 사양 &amp; 어메니티 펼치기</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="room-drawer-content" id="drawer-family">
+                  <div class="room-drawer-section">
+                    <strong>가족 특화 편의 시설</strong>
+                    <p>유아 동반 시 아기 침대, 유아용 욕조, 침대 안전가드 무료 대여 (사전 예약), 친환경 키즈 배스 세트</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>객실 구성</strong>
+                    <p>마스터 침실(킹 베드 + 전용 욕실), 서브 침실(슈퍼싱글 2개), 패밀리 거실, 공용 욕실, 와이드 발코니</p>
+                  </div>
+                </div>
+
+                <div class="room-price-action-bar">
+                  <div class="room-price-box">
+                    <span class="room-price-label">1박 기준 최저 요금</span>
+                    <span class="room-price-value">610,000원~ <small>/ 1박</small></span>
+                  </div>
+                  <a href="reservation.html?room=family-suite" class="btn btn-primary">이 객실 예약하기</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. 프레지덴셜 펜트하우스 (6장 사진) -->
+          <article class="room-card-box reveal" id="presidential-penthouse">
+            <div class="room-card-layout">
+              <div class="room-gallery-col">
+                <div class="room-gallery-main">
+                  <button type="button" class="room-gallery-arrow prev" aria-label="이전 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" class="room-gallery-arrow next" aria-label="다음 사진 보기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                  <img src="images/rooms/efl_top4.png" alt="프레지덴셜 펜트하우스 거실 전경" loading="lazy">
+                </div>
+                <div class="room-gallery-thumbs" role="group" aria-label="프레지덴셜 펜트하우스 사진 둘러보기">
+                  <button type="button" class="room-thumb-btn is-active" data-full="images/rooms/efl_top4.png" aria-label="펜트하우스 거실">
+                    <img src="images/rooms/efl_top4.png" alt="펜트하우스 거실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/efl_top1.png" aria-label="마스터 로열 침실">
+                    <img src="images/rooms/efl_top1.png" alt="마스터 로열 침실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath2.jpg" aria-label="스카이 오션뷰 자쿠지 욕실">
+                    <img src="images/rooms/room_bath2.jpg" alt="스카이 오션뷰 자쿠지 욕실">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top8.png" aria-label="스카이 프라이빗 테라스">
+                    <img src="images/rooms/room_top8.png" alt="스카이 프라이빗 테라스">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_bath1.jpg" aria-label="대리석 파우더룸">
+                    <img src="images/rooms/room_bath1.jpg" alt="대리석 파우더룸">
+                  </button>
+                  <button type="button" class="room-thumb-btn" data-full="images/rooms/room_top7.png" aria-label="인피니티 파노라마">
+                    <img src="images/rooms/room_top7.png" alt="인피니티 파노라마">
+                  </button>
+                </div>
+              </div>
+
+              <div class="room-details-col">
+                <span class="eyebrow">PRESIDENTIAL PENTHOUSE</span>
+                <h3>프레지덴셜 펜트하우스</h3>
+                <p class="room-desc">
+                  윈덤 강원고성 최상층(28층)에 위치한 단 하나의 마스터피스 펜트하우스입니다. 
+                  동해 바다와 설악산 울산바위를 한눈에 내려다보는 360도 스카이뷰, 야외 자쿠지 스파, 전담 버틀러 서비스를 누리실 수 있습니다.
+                </p>
+
+                <div class="room-spec-grid">
+                  <div class="room-spec-item"><span class="label">면적</span><span class="val">145㎡ (약 44평) + 루프 테라스</span></div>
+                  <div class="room-spec-item"><span class="label">침대</span><span class="val">로열 킹 2개 (마스터룸 2실)</span></div>
+                  <div class="room-spec-item"><span class="label">정원</span><span class="val">기준 4인 / 최대 6인</span></div>
+                  <div class="room-spec-item"><span class="label">전망</span><span class="val">360° 최상층 파노라마 오션 & 마운틴뷰</span></div>
+                  <div class="room-spec-item"><span class="label">층수</span><span class="val">28층 (최상층 단독 배정)</span></div>
+                  <div class="room-spec-item"><span class="label">시간</span><span class="val">체크인 15:00 / 체크아웃 13:00 (VIP)</span></div>
+                </div>
+
+                <div class="room-amenities-wrap">
+                  <span class="room-amenity-chip">✓ 최상층 단독 펜트하우스</span>
+                  <span class="room-amenity-chip">✓ 프라이빗 야외 자쿠지 풀</span>
+                  <span class="room-amenity-chip">✓ 전담 버틀러 VIP 컨시어지</span>
+                  <span class="room-amenity-chip">✓ 프리미엄 미니바 전 품목 무료</span>
+                  <span class="room-amenity-chip">✓ 마스터 스위트 2실 &amp; 파우더룸</span>
+                </div>
+
+                <button type="button" class="room-drawer-trigger" data-target="drawer-penthouse" aria-expanded="false">
+                  <span class="drawer-label">객실 상세 사양 &amp; 어메니티 펼치기</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="room-drawer-content" id="drawer-penthouse">
+                  <div class="room-drawer-section">
+                    <strong>로열 VIP 전용 특전</strong>
+                    <p>전용 버틀러 서비스, 공항/터미널 의전 픽업 & 샌딩 서비스(사전 예약), 무료 샴페인 & 캐비아 웰컴 패키지, 미니바 무제한 무료</p>
+                  </div>
+                  <div class="room-drawer-section">
+                    <strong>프라이빗 스파 &amp; 시설</strong>
+                    <p>루프탑 야외 히노끼 자쿠지 온수 스파, 최고급 뱅앤올룹슨 사운드 시스템, 와인 셀러 완비, 13:00 VIP 레이트 체크아웃</p>
+                  </div>
+                </div>
+
+                <div class="room-price-action-bar">
+                  <div class="room-price-box">
+                    <span class="room-price-label">1박 기준 최저 요금</span>
+                    <span class="room-price-value">1,400,000원~ <small>/ 1박</small></span>
+                  </div>
+                  <a href="reservation.html?room=presidential-penthouse" class="btn btn-primary">이 객실 예약하기</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- 공통 어메니티 -->
+    <!-- 공통 어메니티 (팀원 daehyun 커밋 SVG 아이콘 유지) -->
     <section class="section soft">
       <div class="inner">
         <div class="section-title reveal">
           <span class="eyebrow">AMENITIES</span>
           <h2>ROOM AMENITIES</h2>
-          <p>모든 객실에 기본으로 제공되는 서비스입니다.</p>
+          <p>윈덤 강원고성의 모든 객실에 기본으로 제공되는 고품격 서비스입니다.</p>
         </div>
         <div class="feature-grid">
           <div class="feature-item reveal">
@@ -171,7 +606,7 @@
               </svg>
             </div>
             <h3>프리미엄 침구</h3>
-            <p>호텔 전용 구스 침구</p>
+            <p>호텔 전용 시몬스 침대 &amp; 구스 침구</p>
           </div>
           <div class="feature-item reveal">
             <div class="icon" aria-hidden="true">
@@ -183,7 +618,7 @@
               </svg>
             </div>
             <h3>배스 어메니티</h3>
-            <p>친환경 대용량 디스펜서</p>
+            <p>몰튼 브라운 프리미엄 친환경 어메니티</p>
           </div>
           <div class="feature-item reveal">
             <div class="icon" aria-hidden="true">
@@ -195,7 +630,7 @@
               </svg>
             </div>
             <h3>커피 &amp; 티</h3>
-            <p>캡슐 커피 · 티 셀렉션</p>
+            <p>네스프레소 캡슐 머신 &amp; 오설록 티</p>
           </div>
           <div class="feature-item reveal">
             <div class="icon" aria-hidden="true">
@@ -207,7 +642,7 @@
               </svg>
             </div>
             <h3>초고속 Wi-Fi</h3>
-            <p>객실 · 공용공간 무료</p>
+            <p>전 객실 · 발코니 무료 초고속 기가 Wi-Fi</p>
           </div>
         </div>
       </div>
@@ -218,31 +653,33 @@
       <div class="inner reveal">
         <div class="section-title">
           <span class="eyebrow">INFORMATION</span>
-          <h2>이용 안내</h2>
+          <h2>객실 이용 안내</h2>
         </div>
         <table class="info-table">
           <tbody>
-            <tr><th scope="row">체크인 / 체크아웃</th><td>15:00 이후 / 11:00 이전 (스위트 12:00)</td></tr>
-            <tr><th scope="row">추가 인원</th><td>성인 1인 30,000원 · 36개월 미만 무료 (침구 추가 시 별도)</td></tr>
-            <tr><th scope="row">조식</th><td>06:30 ~ 10:00 · 아나나스 뷔페 (성인 38,000원)</td></tr>
-            <tr><th scope="row">주차</th><td>투숙객 1실 1대 무료</td></tr>
+            <tr><th scope="row">체크인 / 체크아웃</th><td>15:00 이후 / 11:00 이전 (스위트 12:00, 펜트하우스 13:00)</td></tr>
+            <tr><th scope="row">추가 인원 요금</th><td>성인 1인 30,000원 · 만 36개월 미만 무료 (침구 추가 시 1채당 20,000원 별도)</td></tr>
+            <tr><th scope="row">조식 뷔페 안내</th><td>06:30 ~ 10:00 · 2층 아나나스 뷔페 레스토랑 (성인 38,000원 / 소인 22,000원)</td></tr>
+            <tr><th scope="row">주차 혜택</th><td>투숙객 1실당 1대 무료 주차 등록 (전기차 급속 충전소 지하 2층 완비)</td></tr>
           </tbody>
         </table>
         <ul class="notice-list">
-          <li>전 객실 금연이며, 반려동물 동반은 불가합니다.</li>
-          <li>객실 요금은 시즌 및 요일에 따라 변동될 수 있습니다.</li>
+          <li>전 객실은 쾌적한 환경 유지를 위해 금연 구역으로 지정되어 있습니다.</li>
+          <li>반려동물 동반 투숙은 불가합니다. (안내견 제외)</li>
+          <li>객실 요금은 성수기, 주말 및 예약 시점에 따라 변동될 수 있습니다.</li>
         </ul>
       </div>
     </section>
 
+    <!-- 하단 예약 CTA 배너 -->
     <section class="cta-band">
       <div class="inner">
         <span class="eyebrow">RESERVATION</span>
-        <h2>바다를 품은 객실에서의 하룻밤</h2>
-        <p>지금 예약하고 동해의 아침을 가장 먼저 맞이하세요.</p>
+        <h2>동해의 수평선을 품은 객실에서의 하루</h2>
+        <p>지금 예약하고 윈덤 강원고성에서 가장 먼저 떠오르는 아침 해를 마주하세요.</p>
         <div class="btn-group">
-          <a href="reservation.html" class="btn btn-white">객실 예약하기</a>
-          <a href="pool.html" class="btn btn-ghost">POOL 둘러보기</a>
+          <a href="reservation.html" class="btn btn-white">실시간 객실 예약</a>
+          <a href="pool.html" class="btn btn-ghost">인피니티 POOL 둘러보기</a>
         </div>
       </div>
     </section>
@@ -265,7 +702,7 @@
         </nav>
       </div>
       <div class="info">
-        <p>강원특별자치도 고성군 (샘플 주소) · T. 000-0000-0000</p>
+        <p>강원특별자치도 고성군 토성면 봉포리 (윈덤 강원고성) · T. 033-000-0000</p>
         <p>© 2026 WYNDHAM GOSEONG GANGWON. All rights reserved.</p>
       </div>
     </div>
@@ -274,7 +711,7 @@
   <script src="js/common.js"></script>
   <script src="js/components/header.js"></script>
   <script src="js/components/reveal.js"></script>
-  <script src="js/components/tabs.js"></script>
+  <script src="js/components/room-gallery.js"></script>
   <script src="js/sub.js"></script>
 </body>
 </html>
