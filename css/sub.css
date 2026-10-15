@@ -196,14 +196,66 @@
 }
 .gallery figure:hover figcaption { transform: none; }
 
-/* ── 아이콘 특징 리스트 ────────────────────────────────────────── */
+/* ── 아이콘 특징 리스트 (메인 페이지 부대시설 카드와 일체화된 프리미엄 스타일) ── */
 .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.feature-item { text-align: center; padding: 34px 20px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 10px; transition: var(--transition); }
-.feature-item:hover { border-color: var(--color-sky-blue); transform: translateY(-6px); box-shadow: 0 16px 34px rgba(80, 125, 155, 0.14); }
-.feature-item .icon { width: 58px; height: 58px; margin: 0 auto 14px; display: grid; place-items: center; border-radius: 50%; background: var(--color-section); font-size: 1.6rem; transition: var(--transition); }
-.feature-item:hover .icon { background: var(--color-sky-blue); }
-.feature-item h3 { font-size: 1.05rem; color: var(--color-text); margin-bottom: 6px; }
-.feature-item p { font-size: 0.88rem; color: var(--color-text-sub); }
+.feature-item {
+  text-align: center;
+  padding: 36px 24px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(32, 56, 75, 0.05);
+  transition: var(--transition);
+}
+.feature-item:hover {
+  background: var(--color-ocean-blue);
+  color: var(--white);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(80, 125, 155, 0.22);
+}
+.feature-item .icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ocean-blue);
+  background: transparent;
+  border-radius: 0;
+}
+.feature-item .icon svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color var(--transition);
+}
+.feature-item:hover .icon {
+  color: var(--white);
+  background: transparent;
+}
+.feature-item:hover .icon svg {
+  transform: scale(1.12);
+}
+.feature-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  transition: color var(--transition);
+}
+.feature-item:hover h3 {
+  color: var(--white);
+}
+.feature-item p {
+  font-size: 0.9rem;
+  color: var(--color-text-sub);
+  line-height: 1.5;
+  transition: color var(--transition);
+}
+.feature-item:hover p {
+  color: var(--white);
+}
 
 /* ── STORY: 타임라인 ───────────────────────────────────────────── */
 .timeline { position: relative; max-width: 860px; margin: 0 auto; }
