@@ -58,6 +58,14 @@
           <article class="panel" data-step-panel="1">
             <h2>일정 · 인원 선택</h2>
             <p class="lead">체크인/체크아웃 날짜와 객실 수, 인원을 선택해 주세요.</p>
+            <div class="selected-room-banner is-hidden" id="selectedRoomBanner">
+              <div class="banner-icon">✓</div>
+              <div class="banner-text">
+                선택된 객실:<strong id="selectedRoomName"></strong>
+                <small id="selectedRoomDesc"></small>
+              </div>
+              <a href="rooms.html" class="change-room-link">객실 변경</a>
+            </div>
             <form id="searchForm" novalidate>
               <div class="form-grid">
                 <div class="form-group">
@@ -98,7 +106,7 @@
               </div>
               <p class="form-error is-hidden" id="searchError" role="alert"></p>
               <div class="actions">
-                <button type="submit" class="btn btn-primary">객실 조회</button>
+                <button type="submit" class="btn btn-primary" id="btnSearchSubmit">객실 조회</button>
               </div>
             </form>
           </article>

@@ -28,6 +28,57 @@
 .panel h2 { font-size: 1.3rem; color: var(--text-main); margin-bottom: 4px; }
 .panel .lead { color: var(--text-sub); font-size: 0.92rem; margin-bottom: 22px; }
 
+/* 선택된 객실 알림 배너 */
+.selected-room-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #f0f7fc;
+  border: 1px solid rgba(31, 66, 99, 0.18);
+  border-left: 4px solid var(--blue-500, #1F4263);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+}
+.selected-room-banner.is-hidden { display: none !important; }
+.selected-room-banner .banner-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue-500, #1F4263);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.selected-room-banner .banner-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-main, #141E28);
+}
+.selected-room-banner .banner-text strong {
+  color: var(--blue-500, #1F4263);
+  margin-left: 4px;
+}
+.selected-room-banner .banner-text small {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-sub, #44505C);
+  margin-top: 2px;
+}
+.selected-room-banner .change-room-link {
+  font-size: 0.85rem;
+  color: var(--blue-500, #1F4263);
+  text-decoration: underline;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
 /* 검색 폼 (일정/인원) */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -56,6 +107,15 @@
 .room-option .total strong { display: block; color: var(--blue-500); font-size: 1.25rem; }
 .room-option .total small { display: block; color: var(--text-sub); margin-bottom: 8px; }
 .room-option .btn { padding: 10px 22px; }
+.room-option.is-selected {
+  border-color: var(--blue-500, #1F4263);
+  background: rgba(31, 66, 99, 0.04);
+  box-shadow: 0 6px 22px rgba(31, 66, 99, 0.15);
+}
+.room-option.is-selected h3 {
+  color: var(--blue-500, #1F4263);
+}
+
 
 /* 예약 요약 (우측 스티키) */
 .summary { position: sticky; top: calc(var(--header-h) + 20px); }
