@@ -8,11 +8,14 @@
 /* ── 현재 페이지 메뉴 표시 ─────────────────────────────────────── */
 .gnb a[aria-current="page"]::after { width: 100%; }
 
-/* ── 서브 히어로 (사진 배경 + 켄 번스) ──────────────────────────── */
+/* ── 서브 히어로 (사진 배경 + 켄 번스: 메인과 동일한 100vh 풀스크린) ────────────────── */
 .sub-hero {
   position: relative;
-  height: 64vh;
-  min-height: 440px;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: flex-end;
   color: var(--white);
@@ -28,23 +31,38 @@
   animation: heroKenBurns 24s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate; /* main.css 키프레임 재사용 */
   will-change: transform;
 }
+/* ★ 가독성 및 경계 그라데이션 오버레이 (사진 선명도를 높이고 하단 경계만 은은하게 페이드)
+   - 상단: 헤더 가독성을 위한 최소한의 은은한 틴트
+   - 중앙: 사진 본연의 선명한 색감을 살리는 투명 영역
+   - 하단: 맨 아래 경계선만 부드럽게 녹아드는 소프트 화이트 페이드 */
 .sub-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(180deg,
-    rgba(32, 56, 75, 0.55) 0%,
-    rgba(32, 56, 75, 0.15) 40%,
-    rgba(32, 56, 75, 0.65) 100%);
+    rgba(32, 56, 75, 0.38) 0%,
+    rgba(32, 56, 75, 0.08) 30%,
+    transparent 55%,
+    transparent 84%,
+    rgba(255, 255, 255, 0.35) 93%,
+    rgba(255, 255, 255, 1) 100%);
 }
-.sub-hero-content { position: relative; z-index: 2; padding-bottom: 72px; animation: subFadeUp 1s ease both 0.2s; }
-.breadcrumb { display: flex; gap: 8px; font-size: 0.85rem; opacity: 0.85; margin-bottom: 18px; }
+.sub-hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding-top: calc(var(--header-h) + 40px);
+  padding-bottom: 100px;
+  animation: subFadeUp 1s ease both 0.2s;
+}
+.breadcrumb { display: flex; gap: 8px; font-size: 0.85rem; opacity: 0.9; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(32, 56, 75, 0.6); }
 .breadcrumb a:hover { color: var(--color-sky-blue); }
 .breadcrumb li + li::before { content: '/'; margin-right: 8px; opacity: 0.6; }
-.sub-hero .eyebrow { display: block; font-family: var(--font-display); letter-spacing: 0.35em; color: var(--color-sky-blue); margin-bottom: 10px; }
-.sub-hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.4rem, 6vw, 4.6rem); letter-spacing: 0.05em; line-height: 1.1; text-shadow: 0 4px 24px rgba(32, 56, 75, 0.5); }
-.sub-hero p { margin-top: 14px; max-width: 560px; font-weight: 300; font-size: 1.05rem; opacity: 0.95; }
+.sub-hero .eyebrow { display: block; font-family: var(--font-display); letter-spacing: 0.35em; color: var(--color-sky-blue); margin-bottom: 10px; text-shadow: 0 2px 10px rgba(32, 56, 75, 0.6); }
+.sub-hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.4rem, 6vw, 4.6rem); letter-spacing: 0.05em; line-height: 1.1; text-shadow: 0 4px 24px rgba(32, 56, 75, 0.6); }
+.sub-hero p { margin-top: 14px; max-width: 560px; font-weight: 400; font-size: 1.05rem; opacity: 0.95; text-shadow: 0 2px 12px rgba(32, 56, 75, 0.6); }
 @keyframes subFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
 
 
@@ -242,6 +260,7 @@
   .gallery { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
+  .sub-hero-content { padding-bottom: 80px; }
   .detail-row { grid-template-columns: 1fr; gap: 32px; }
   .detail-row.reverse .detail-media { order: 0; }
   .detail-row + .detail-row { margin-top: 70px; }
@@ -250,6 +269,7 @@
   .timeline-item:nth-child(odd)::before, .timeline-item:nth-child(even)::before { left: 0; right: auto; }
 }
 @media (max-width: 600px) {
+  .sub-hero-content { padding-bottom: 60px; }
   .card-grid, .feature-grid { grid-template-columns: 1fr; }
   .spec-list { grid-template-columns: 1fr; }
   .gallery { grid-auto-rows: 160px; }
