@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCEAN VIEW HOTEL | 오션뷰 호텔 공식 홈페이지</title>
+  <meta name="description" content="청정해변과 설악산 울산바위를 감상할 수 있는 오션뷰 호텔. 인피니티 풀, 파노라마 객실, 미식 다이닝을 온라인으로 예약하세요.">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/main01.css">
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="inner">
+      <!-- 로고: images/logo.svg -->
+      <a href="#top" class="logo" aria-label="WYNDHAM GOSEONG GANGWON 홈">
+        <img src="images/logo.svg" alt="WYNDHAM GOSEONG GANGWON" class="logo-img">
+        <span class="logo-text">WYNDHAM</span>
+      </a>
+      <nav class="gnb" id="gnb" aria-label="주요 메뉴">
+        <a href="rooms.html">ROOMS</a>
+        <a href="pool.html">POOL</a>
+        <a href="dining.html">DINING</a>
+        <a href="facilities.html">FACILITIES</a>
+        <a href="story.html">STORY</a>
+      </nav>
+      <div class="header-actions">
+        <a href="reservation.html" class="btn btn-white">예약하기</a>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO + 예약 바 -->
+    <section class="hero" id="booking">
+      <!-- 낮 / 일몰 / 밤 인피니티 풀 다이내믹 배경 레이어 -->
+      <div class="hero-bg-wrapper" aria-hidden="true">
+        <div class="hero-bg-layer is-active" data-theme-layer="day" style="background-image: url('images/ref/bg_main.png');"></div>
+        <div class="hero-bg-layer" data-theme-layer="sunset" style="background-image: url('images/bg_sunset.jpg');"></div>
+        <div class="hero-bg-layer" data-theme-layer="night" style="background-image: url('images/bg_night.jpg');"></div>
+      </div>
+
+      <!-- 시간대별(낮/일몰/밤) 인피니티 풀 테마 스위처 바 -->
+      <nav class="time-ambient-nav" role="tablist" aria-label="인피니티 풀 시간대별 풍경 선택">
+        <button type="button" role="tab" class="time-btn is-active" data-time="day" aria-selected="true" aria-controls="booking">
+          <span class="time-idx">01</span>
+          <span class="time-label">DAY</span>
+        </button>
+        <button type="button" role="tab" class="time-btn" data-time="sunset" aria-selected="false" aria-controls="booking" tabindex="-1">
+          <span class="time-idx">02</span>
+          <span class="time-label">SUNSET</span>
+        </button>
+        <button type="button" role="tab" class="time-btn" data-time="night" aria-selected="false" aria-controls="booking" tabindex="-1">
+          <span class="time-idx">03</span>
+          <span class="time-label">NIGHT</span>
+        </button>
+      </nav>
+
+      <div class="hero-content">
+        <span class="eyebrow">WYNDHAM GOSEONG · INFINITY POOL</span>
+        <h1>ENDLESS BLUE,<br>PERFECT MOMENT</h1>
+        <p>청정 동해 바다와 맞닿은 루프탑 인피니티 풀에서 눈부신 햇살과 함께 온전한 휴식을 경험하세요.</p>
+        <a href="#rooms" class="more-link">자세히 보기 &gt;</a>
+      </div>
+
+      <!-- ★ 빠른 예약(Quick Booking) 폼 : 동작은 js/components/booking-bar.js 에서 처리 -->
+      <div class="booking-bar">
+        <form class="booking-form" id="bookingForm" aria-label="빠른 예약" novalidate>
+          <div class="booking-field">
+            <label for="checkIn">CHECK-IN</label>
+            <input type="date" id="checkIn" name="checkIn" required>
+          </div>
+          <div class="booking-field">
+            <label for="checkOut">CHECK-OUT <output id="nightsOutput" class="booking-night" for="checkIn checkOut"></output></label>
+            <input type="date" id="checkOut" name="checkOut" required>
+          </div>
+          <div class="booking-field">
+            <label for="rooms">ROOMS</label>
+            <select id="rooms" name="rooms">
+              <option value="1" selected>객실 1개</option>
+              <option value="2">객실 2개</option>
+              <option value="3">객실 3개</option>
+              <option value="4">객실 4개</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label for="adults">ADULTS</label>
+            <select id="adults" name="adults">
+              <option value="1">성인 1명</option>
+              <option value="2" selected>성인 2명</option>
+              <option value="3">성인 3명</option>
+              <option value="4">성인 4명</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label for="children">CHILDREN</label>
+            <select id="children" name="children">
+              <option value="0" selected>어린이 0명</option>
+              <option value="1">어린이 1명</option>
+              <option value="2">어린이 2명</option>
+              <option value="3">어린이 3명</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" id="bookingSubmit">객실 조회</button>
+        </form>
+        <p class="booking-error is-hidden" id="bookingError" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- ROOMS -->
+    <section class="section rooms" id="rooms">
+      <div class="inner">
+        <div class="section-title reveal">
+          <span class="eyebrow">ROOMS</span>
+          <h2>OCEAN VIEW ROOMS</h2>
+          <p>모든 객실에서 탁 트인 동해 바다를 마주합니다. <a href="rooms.html" class="text-link">객실 자세히 보기 &gt;</a></p>
+        </div>
+        <div class="room-grid">
+          <article class="room-card reveal">
+            <div class="thumb"><img src="images/ref/img_room1.jpg" alt="디럭스 오션 객실"></div>
+            <div class="body">
+              <h3>디럭스 오션</h3>
+              <p class="meta">침대 1 · 최대 2인 · 32㎡</p>
+              <div class="row">
+                <span class="price">220,000원 <small>/ 1박~</small></span>
+                <button type="button" class="btn btn-outline" data-book-room="deluxe">예약하기</button>
+              </div>
+            </div>
+          </article>
+          <article class="room-card reveal">
+            <div class="thumb"><img src="images/ref/img_room2.jpg" alt="프리미어 오션 객실"></div>
+            <div class="body">
+              <h3>프리미어 오션</h3>
+              <p class="meta">침대 2 · 최대 3인 · 42㎡</p>
+              <div class="row">
+                <span class="price">320,000원 <small>/ 1박~</small></span>
+                <button type="button" class="btn btn-outline" data-book-room="premier">예약하기</button>
+              </div>
+            </div>
+          </article>
+          <article class="room-card reveal">
+            <div class="thumb"><img src="images/ref/img_room_detail_top1.png" alt="스카이 스위트 객실"></div>
+            <div class="body">
+              <h3>스카이 스위트</h3>
+              <p class="meta">침대 2 · 최대 4인 · 66㎡</p>
+              <div class="row">
+                <span class="price">520,000원 <small>/ 1박~</small></span>
+                <button type="button" class="btn btn-outline" data-book-room="suite">예약하기</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="section story" id="story">
+      <div class="inner story-wrap">
+        <div class="reveal">
+          <span class="eyebrow">OUR STORY</span>
+          <h2>바다와 하늘이<br>맞닿은 순간</h2>
+          <p>스카이블루 빛 하늘과 에메랄드빛 바다가 만나는 곳. 오션뷰 호텔은 머무는 모든 순간이 한 폭의 풍경이 되도록 설계되었습니다.</p>
+          <div class="story-stats">
+            <div><strong>100%</strong><span>오션뷰 객실</span></div>
+            <div><strong>24H</strong><span>인피니티 풀 뷰</span></div>
+            <div><strong>3</strong><span>다이닝 공간</span></div>
+          </div>
+          <a href="reservation.html" class="btn btn-white">지금 예약하기</a>
+        </div>
+        <img class="reveal" src="images/ref/img_story.png" alt="루프탑 라운지 및 야경">
+      </div>
+    </section>
+
+    <!-- POOL -->
+    <section class="split" id="pool">
+      <div class="photo reveal"><img src="images/ref/img_pool_infinity.png" alt="인피니티 풀"></div>
+      <div class="text reveal">
+        <span class="eyebrow">POOL</span>
+        <h2>INFINITY POOL</h2>
+        <p>수평선과 이어지는 인피니티 풀에서 하늘과 바다를 온전히 느껴 보세요. 프라이빗 풀과 키즈 풀까지 가족 모두를 위한 공간을 준비했습니다.</p>
+        <a href="reservation.html" class="btn btn-primary">풀 패키지 예약하기</a>
+      </div>
+    </section>
+
+    <!-- DINING -->
+    <section class="split reverse soft" id="dining">
+      <div class="photo reveal"><img src="images/ref/img_dining_ananas.png" alt="오션뷰 다이닝 뷔페"></div>
+      <div class="text reveal">
+        <span class="eyebrow">DINING</span>
+        <h2>SEASIDE DINING</h2>
+        <p>동해에서 갓 올라온 신선한 해산물과 다채로운 뷔페 다이닝을 파노라마 바다 전망과 함께 즐기세요.</p>
+        <a href="reservation.html" class="btn btn-primary">다이닝 예약 및 문의</a>
+      </div>
+    </section>
+
+    <!-- FACILITIES -->
+    <section class="section facilities" id="facilities">
+      <div class="inner">
+        <div class="section-title reveal">
+          <span class="eyebrow">FACILITIES</span>
+          <h2>FACILITIES</h2>
+          <p>머무는 시간을 더욱 특별하게 만드는 부대시설 <a href="facilities.html" class="text-link">시설 자세히 보기 &gt;</a></p>
+        </div>
+        <div class="fac-grid">
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 26c3-4 6-6 9-6s6 2 9 6 6 6 9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M6 20c3-4 6-6 9-6s6 2 9 6 6 6 9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
+                <circle cx="20" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>POOL</h3><p>인피니티 · 프라이빗 · 키즈</p>
+          </div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 8v8a6 6 0 0 0 12 0V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="20" y1="22" x2="20" y2="32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="15" y1="32" x2="25" y2="32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="14" y1="12" x2="14" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="26" y1="12" x2="26" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>DINING</h3><p>시그니처 레스토랑 &amp; 라운지</p>
+          </div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="17" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="26" y="17" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <line x1="14" y1="20" x2="26" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="3" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>FITNESS</h3><p>오션뷰 피트니스 센터</p>
+          </div>
+          <div class="fac-item reveal">
+            <div class="icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="20,8 24,16 33,17 27,23 28,32 20,28 12,32 13,23 7,17 16,16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>BANQUET</h3><p>웨딩 · 비즈니스 연회장</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="inner">
+      <div class="top">
+        <a href="#top" class="logo" aria-label="WYNDHAM GOSEONG GANGWON 홈">
+          <img src="images/logo.svg" alt="WYNDHAM GOSEONG GANGWON" class="logo-img">
+          <span class="logo-text">WYNDHAM</span>
+        </a>
+        <nav class="footer-links" aria-label="푸터 메뉴">
+          <a href="rooms.html">ROOMS</a>
+          <a href="pool.html">POOL</a>
+          <a href="dining.html">DINING</a>
+          <a href="facilities.html">FACILITIES</a>
+          <a href="story.html">STORY</a>
+          <a href="reservation.html">RESERVATION</a>
+        </nav>
+      </div>
+      <div class="info">
+        <p>강원특별자치도 고성군 (샘플 주소) · T. 000-0000-0000</p>
+        <p>© 2026 OCEAN VIEW HOTEL. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/components/header.js"></script>
+  <script src="js/components/reveal.js"></script>
+  <script src="js/components/booking-bar.js"></script>
+  <script src="js/components/time-ambient.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
