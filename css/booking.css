@@ -16,19 +16,17 @@
 .booking-form {
   display: grid;
   grid-template-columns: repeat(5, 1fr) auto;
-  background: rgba(255, 255, 255, 0.94);
-  /* 반투명 화이트 (글래스 효과) */
-  backdrop-filter: blur(14px);
+  background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
-  box-shadow: 0 24px 60px rgba(32, 56, 75, 0.18);
+  border-radius: 8px;
+  box-shadow: none;                     /* 하단 화면과의 단차를 유발하던 그림자 완전 제거 */
   overflow: hidden;
   text-align: left;
 }
 
 .booking-field {
   padding: 16px 20px;
-  border-right: 1px solid var(--line-light);
+  border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -41,9 +39,11 @@
 }
 
 .booking-field label {
-  font-family: var(--font-display);
-  letter-spacing: 0.14em;
+  font-family: var(--font-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   font-size: 0.72rem;
+  font-weight: 500;
   color: var(--blue-500);
 }
 

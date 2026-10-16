@@ -4,7 +4,7 @@
    ▶ 색상을 바꾸고 싶다면 아래 :root 의 변수만 수정하세요. (전체 사이트에 반영됨)
    ▶ 컨셉: 딥 네이비 배경 + 스카이블루 포인트 + 화이트 텍스트
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Oswald:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap');
 
 :root {
   /* ── Brand colors (사용자 가이드 비율 적용) ─────────────────────────── */
@@ -52,9 +52,13 @@
   --line: var(--color-silver-blue);
   --danger: #d64545;
 
-  /* ── 타이포 / 형태 ───────────────────────────────────────────── */
-  --font-body: 'Noto Sans KR', sans-serif;
-  --font-display: 'Oswald', 'Noto Sans KR', sans-serif;
+  /* ── 타이포 / 형태 (Aman / 5성급 럭셔리 호텔 타이포그래피 스펙) ────── */
+  --font-serif-en: 'Cormorant Garamond', serif;
+  --font-serif-ko: 'Noto Serif KR', serif;
+  --font-display: 'Cormorant Garamond', 'Noto Serif KR', serif; /* 영문/한글 제목 */
+  --font-body: 'Noto Sans KR', sans-serif;                      /* 본문/메뉴/버튼 */
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --font-label: 'Montserrat', sans-serif;                       /* 작은 영문 라벨 (아만 스타일) */
   --radius: 6px;
   --shadow: 0 14px 40px rgba(32, 56, 75, 0.12);
   --transition: 0.3s ease;
@@ -85,6 +89,20 @@ body {
   word-break: keep-all;
   overflow-x: hidden;
   max-width: 100%;
+  font-variant-numeric: lining-nums tabular-nums;
+  -webkit-font-feature-settings: "lnum" 1, "tnum" 1;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
+/* 모든 헤드라인 및 텍스트 요소의 숫자-영문-한글 기준선 및 크기 일치 */
+h1, h2, h3, h4, h5, h6,
+.section-title h2,
+.sub-intro h2,
+.detail-text h3,
+strong, b, em {
+  font-variant-numeric: lining-nums tabular-nums;
+  -webkit-font-feature-settings: "lnum" 1, "tnum" 1;
+  font-feature-settings: "lnum" 1, "tnum" 1;
 }
 
 img { display: block; max-width: 100%; }
@@ -106,16 +124,18 @@ button { cursor: pointer; border: 0; background: none; color: inherit; }
 .is-hidden { display: none !important; }
 body.no-scroll { overflow: hidden; }                  /* 모달 열릴 때 배경 스크롤 방지 */
 
-/* ── 버튼 ─────────────────────────────────────────────────────── */
+/* ── 버튼 (본문/메뉴/버튼: Noto Sans KR 400~500) ─────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 32px;
+  padding: 13px 30px;
   border-radius: var(--radius);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
   transition: var(--transition);
 }
 .btn-primary { background: var(--blue-500); color: var(--white); }
@@ -130,20 +150,22 @@ body.no-scroll { overflow: hidden; }                  /* 모달 열릴 때 배�
 .section-title { text-align: center; margin-bottom: 56px; }
 .section-title .eyebrow {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-label);
   letter-spacing: 0.25em;
+  text-transform: uppercase;
   color: var(--blue-500);
-  font-size: 0.95rem;
-  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 .section-title h2 {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
   color: var(--text-main);
   letter-spacing: 0.04em;
 }
-.section-title p { margin-top: 12px; color: var(--text-sub); }
+.section-title p { margin-top: 14px; color: var(--text-sub); font-weight: 300; }
 .text-link { color: var(--color-ocean-blue); font-weight: 500; border-bottom: 1px solid currentColor; margin-left: 6px; transition: color var(--transition); }
 .text-link:hover { color: var(--color-deep-navy); }
 

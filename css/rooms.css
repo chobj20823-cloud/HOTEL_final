@@ -375,18 +375,26 @@
 }
 
 .room-price-value {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 1.75rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-label);
+  font-size: 1.65rem;
+  font-weight: 600;
   color: var(--color-ocean-blue, #1F4263);
   line-height: 1.1;
+  letter-spacing: -0.02em;
   margin-top: 0.2rem;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
 }
 
 .room-price-value small {
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 400;
   color: var(--color-text-sub, #44505C);
+  margin-left: 6px;
+  letter-spacing: 0;
 }
 
 /* Responsive */

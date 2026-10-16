@@ -49,8 +49,16 @@ main {
 .header.header--solid .logo-img--color { display: block; }
 
 .footer .logo-img { height: var(--logo-h); width: auto; display: block; }
-.gnb { display: flex; gap: 40px; }
-.gnb a { font-family: var(--font-display); letter-spacing: 0.12em; font-size: 0.95rem; position: relative; padding: 6px 0; }
+.gnb { display: flex; gap: 36px; }
+.gnb a {
+  font-family: var(--font-label);
+  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+  padding: 6px 0;
+}
 .gnb a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--sky-300); transition: width var(--transition); }
 .gnb a:hover::after { width: 100%; }
 .header-actions { display: flex; align-items: center; gap: 16px; }
@@ -238,49 +246,52 @@ main {
   margin: 0 auto;
 }
 .hero-content .eyebrow {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 400;
-  letter-spacing: 0.32em;
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--color-sky-blue);
   margin-bottom: 14px;
   display: block;
-  text-shadow: 0 2px 10px rgba(32, 56, 75, 0.6);
+  text-shadow: 0 1px 8px rgba(15, 23, 42, 0.85);
   transition: color 0.6s ease;
 }
 body[data-theme="sunset"] .hero-content .eyebrow {
   color: #fed7aa;
-  text-shadow: 0 2px 12px rgba(124, 45, 18, 0.7);
 }
 body[data-theme="night"] .hero-content .eyebrow {
   color: #7dd3fc;
-  text-shadow: 0 2px 12px rgba(12, 74, 110, 0.8);
 }
 
 .hero-content h1 {
   font-family: var(--font-display);
-  font-weight: 400;                     /* 두께를 600 -> 400으로 얇게 조절 */
-  font-size: clamp(1.8rem, 3.8vw, 3.2rem); /* 크기를 절제된 비율로 축소 */
-  letter-spacing: 0.1em;                /* 자간을 넓혀 고급스러운 여백미 */
-  line-height: 1.25;
-  text-shadow: 0 3px 20px rgba(15, 23, 42, 0.55);
+  font-weight: 400;                     /* 획 선명도 확보 */
+  font-size: clamp(2rem, 4vw, 3.2rem);   /* 크기 절제 및 축소 */
+  letter-spacing: 0.04em;               /* 자간 축소 */
+  line-height: 1.2;
+  text-shadow: 0 2px 14px rgba(15, 23, 42, 0.85), 0 1px 3px rgba(15, 23, 42, 0.9);
 }
 .hero-content p {
-  margin: 20px auto 28px;
-  max-width: 520px;
-  font-size: 0.98rem;                   /* 1.1rem -> 0.98rem 로 슬림화 */
-  font-weight: 300;                     /* 400 -> 300 라이트 굵기 */
+  margin: 18px auto 26px;
+  max-width: 580px;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 400;
   line-height: 1.75;
-  opacity: 0.92;
-  text-shadow: 0 2px 12px rgba(15, 23, 42, 0.55);
+  opacity: 0.95;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 8px rgba(15, 23, 42, 0.85);
 }
 .more-link {
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  font-weight: 500;
+  text-transform: uppercase;
   border-bottom: 1px solid rgba(255, 255, 255, 0.75);
-  padding-bottom: 3px;
-  text-shadow: 0 2px 10px rgba(32, 56, 75, 0.5);
+  padding-bottom: 4px;
+  text-shadow: 0 1px 8px rgba(15, 23, 42, 0.85);
   transition: color var(--transition), border-color var(--transition), transform var(--transition);
   display: inline-block;
 }
@@ -425,12 +436,24 @@ body[data-theme="night"] .hero-content .eyebrow {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 28px 60px rgba(184, 221, 242, 0.22), 0 16px 40px rgba(32, 56, 75, 0.45);
 }
-.story .eyebrow { font-family: var(--font-display); letter-spacing: 0.25em; color: var(--color-sky-blue); opacity: 0.95; }
-.story h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 4vw, 3rem); margin: 8px 0 20px; letter-spacing: 0.04em; }
-.story p { font-weight: 300; margin-bottom: 28px; color: var(--text-muted); }
+.story .eyebrow { font-family: var(--font-label); letter-spacing: 0.28em; text-transform: uppercase; font-size: 0.8rem; font-weight: 500; color: var(--color-sky-blue); opacity: 0.95; }
+.story h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); margin: 10px 0 20px; letter-spacing: 0.04em; }
+.story p { font-family: var(--font-body); font-weight: 300; margin-bottom: 28px; color: var(--text-muted); line-height: 1.8; }
 .story-stats { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 32px; }
-.story-stats strong { display: block; font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; color: var(--color-sky-blue); }
-.story-stats span { font-size: 0.85rem; opacity: 0.9; }
+.story-stats strong {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-label);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--color-sky-blue);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+.story-stats span { font-size: 0.85rem; opacity: 0.92; font-weight: 400; }
 
 /* ── 포토 스플릿 (POOL: 화이트 / DINING: 아이스 블루 20%) ──────── */
 .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; background: var(--color-white); overflow: hidden; }
@@ -467,9 +490,9 @@ body[data-theme="night"] .hero-content .eyebrow {
 }
 
 .split .text { display: flex; flex-direction: column; justify-content: center; padding: 60px min(8vw, 100px); }
-.split .text .eyebrow { font-family: var(--font-display); letter-spacing: 0.25em; color: var(--color-ocean-blue); }
-.split .text h2 { font-family: var(--font-display); font-weight: 500; font-size: 2.4rem; color: var(--color-text); margin: 8px 0 16px; letter-spacing: 0.04em; }
-.split .text p { color: var(--color-text-sub); margin-bottom: 28px; }
+.split .text .eyebrow { font-family: var(--font-label); letter-spacing: 0.28em; text-transform: uppercase; font-size: 0.8rem; font-weight: 500; color: var(--color-ocean-blue); }
+.split .text h2 { font-family: var(--font-display); font-weight: 400; font-size: 2.4rem; color: var(--color-text); margin: 10px 0 16px; letter-spacing: 0.04em; }
+.split .text p { font-family: var(--font-body); font-weight: 300; color: var(--color-text-sub); margin-bottom: 28px; line-height: 1.8; }
 .split .text .btn { align-self: flex-start; }
 .split.reverse .photo { order: 2; }
 .split.soft, .split.soft .text { background: var(--color-section); }

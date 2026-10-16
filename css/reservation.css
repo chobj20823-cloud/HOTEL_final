@@ -125,14 +125,34 @@
 .summary dd { color: var(--text-main); font-weight: 500; text-align: right; }
 .summary .total-row { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line-light); display: flex; justify-content: space-between; align-items: baseline; }
 .summary .total-row span { color: var(--text-sub); font-size: 0.9rem; }
-.summary .total-row strong { color: var(--blue-500); font-size: 1.5rem; }
+.summary .total-row strong {
+  color: var(--blue-500);
+  font-size: 1.5rem;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
 .summary .note { margin-top: 14px; font-size: 0.8rem; color: var(--text-sub); }
 
 /* 예약 완료 */
 .done-box { text-align: center; padding: 20px 0; }
 .done-box .check { width: 76px; height: 76px; margin: 0 auto 18px; border-radius: 50%; background: var(--blue-500); color: var(--white); font-size: 2.4rem; display: flex; align-items: center; justify-content: center; animation: pop 0.5s ease; }
 .done-box h2 { font-size: 1.5rem; }
-.done-box .code { display: inline-block; margin: 14px 0; padding: 8px 20px; background: var(--surface-soft); color: var(--blue-600); font-family: var(--font-display); letter-spacing: 0.15em; font-size: 1.2rem; border-radius: var(--radius); }
+.done-box .code {
+  display: inline-block;
+  margin: 14px 0;
+  padding: 8px 20px;
+  background: var(--surface-soft);
+  color: var(--blue-600);
+  font-family: var(--font-label);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  font-size: 1.2rem;
+  border-radius: var(--radius);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
 .done-table { width: 100%; max-width: 480px; margin: 18px auto 26px; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
 .done-table th, .done-table td { padding: 10px 12px; border-bottom: 1px solid var(--line-light); }
 .done-table th { width: 110px; color: var(--text-sub); font-weight: 500; }
